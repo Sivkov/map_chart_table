@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from 'react-bootstrap';
+import { connect } from 'react-redux';
+
 
 export class TableBasic extends Component {
   render() {
@@ -36,4 +38,6 @@ export class TableBasic extends Component {
     )
   }
 }
+
+
 export default TableBasic;

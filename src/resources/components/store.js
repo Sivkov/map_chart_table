@@ -1,6 +1,8 @@
 import React from "react";
 import { Line, Pie, Bar } from "react-chartjs-2";
-import { Button, ButtonGroup  } from 'react-bootstrap';
+import Alert from 'react-bootstrap/Alert';
+
+
 import '../style.css'
 
 class LineChart extends React.Component {
@@ -66,11 +68,15 @@ class LineChart extends React.Component {
 
       return (
       <div>
-          <ButtonGroup >
-          <Button bsStyle="primary" onClick={ this.charTypeChange }  data-chart="Line">Line</Button>
-          <Button bsStyle="primary" onClick={ this.charTypeChange }  data-chart="Pie">Pie</Button>
-          <Button bsStyle="primary" onClick={ this.charTypeChange }  data-chart="Bar">Bar</Button>
-        </ButtonGroup >
+        <Alert dismissible variant="danger" onClick={ this.charTypeChange }  data-chart="Line">
+          <Alert.Heading>Line</Alert.Heading>
+        </Alert>
+        <Alert dismissible variant="danger" onClick={ this.charTypeChange }  data-chart="Pie">
+          <Alert.Heading>Pie</Alert.Heading>
+        </Alert>
+        <Alert dismissible variant="danger" onClick={ this.charTypeChange }  data-chart="Bar">
+          <Alert.Heading>Bar</Alert.Heading>
+        </Alert>
         <div className={ this.state.charType === 'Line'?  "" : "nodisplay" }>
           <Line data={this.state.data} 
             legend={this.state.legend} 
