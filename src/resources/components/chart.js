@@ -1,7 +1,8 @@
 import React from "react";
 import { Line, Pie, Bar } from "react-chartjs-2";
 import { Button, ButtonGroup  } from 'react-bootstrap';
-import '../style.css'
+import { connect } from 'react-redux';
+
 
 class LineChart extends React.Component {
   constructor(props) {
@@ -66,7 +67,7 @@ class LineChart extends React.Component {
 
       return (
       <div>
-          <ButtonGroup >
+        <ButtonGroup >
           <Button bsStyle="primary" onClick={ this.charTypeChange }  data-chart="Line">Line</Button>
           <Button bsStyle="primary" onClick={ this.charTypeChange }  data-chart="Pie">Pie</Button>
           <Button bsStyle="primary" onClick={ this.charTypeChange }  data-chart="Bar">Bar</Button>
@@ -92,4 +93,10 @@ class LineChart extends React.Component {
     
   }
 
-  export default LineChart;
+  export default connect(
+    state => ({
+      data: state
+    }),
+    dispatch => ({})
+  )(LineChart);
+  

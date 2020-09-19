@@ -39,5 +39,10 @@ export class TableBasic extends Component {
   }
 }
 
+export default connect(
+  state => ({
+    data: state
+  }),
+  dispatch => ({})
+)(TableBasic);
 
-export default TableBasic;

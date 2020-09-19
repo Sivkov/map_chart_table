@@ -1,19 +1,24 @@
-import React from 'react';
-import TableBasic from "./resources/components/table";
-import Example from './resources/components/example';
-import LineChar from './resources/components/chart';
-import { Provider } from 'react-redux';
+import React, { Component } from 'react';
+import Main from './resources/components/main';
+import './resources/style.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.bundle';
+import { connect } from 'react-redux';
 
-function App() {
-  return (
-    <div className="App">
-        
-          <TableBasic />
-          <Example />
-          <LineChar />
-      
-    </div>
-  );
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Main />
+      </div>
+    );
+  }
 }
 
-export default App;
+export default connect(
+  state => ({
+    data: state
+  }),
+  dispatch => ({})
+)(App);
