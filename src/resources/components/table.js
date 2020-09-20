@@ -1,41 +1,36 @@
 import React, { Component } from 'react';
 import { Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+
+let products = [];
+
+class TableBasic extends React.Component {
+  constructor(props) {
+    super(props);
+    this.products = this.props.data
+    this.handleBtnClick = this.handleBtnClick.bind(this);
+  }
+
+  handleBtnClick () {
+    alert (this.props.data)
+  }
 
 
-export class TableBasic extends Component {
   render() {
     return (
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td colSpan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-</Table>
-    )
+      <div>
+        <button onClick={ this.handleBtnClick }>Sort Product Name</button>
+        <BootstrapTable ref='table' data={ this.products }>
+            <TableHeaderColumn dataField='id' isKey={ true } dataSort={ true }>Product ID</TableHeaderColumn>
+            <TableHeaderColumn dataField='name' dataSort={ true }>Product Name</TableHeaderColumn>
+            <TableHeaderColumn dataField='price1' dataSort={ true } >Product Price</TableHeaderColumn>
+            <TableHeaderColumn dataField='price11' dataSort={ true } >Product Price</TableHeaderColumn>
+            <TableHeaderColumn dataField='price111' dataSort={ true } >Product Price</TableHeaderColumn>
+            <TableHeaderColumn dataField='price1111' dataSort={ true } >Product Price</TableHeaderColumn>
+        </BootstrapTable>
+      </div>
+    );
   }
 }
 
