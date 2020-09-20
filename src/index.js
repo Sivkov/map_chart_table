@@ -6,14 +6,28 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 
-const initilaState = [
-  {'operator':'1','territory':'1', 'value1':'10',  'value2':'20', 'value2':'30',  'territory':'1'},
-  {'operator':'1','territory':'2', 'value1':'10',  'value2':'20', 'value2':'30',  'territory':'1'},
-  {'operator':'1','territory':'3', 'value1':'10',  'value2':'20', 'value2':'30',  'territory':'1'},
-  {'operator':'2','territory':'1', 'value1':'10',  'value2':'20', 'value2':'30',  'territory':'1'},
-  {'operator':'3','territory':'1', 'value1':'10',  'value2':'20', 'value2':'30',  'territory':'1'},
-  {'operator':'4','territory':'1', 'value1':'10',  'value2':'20', 'value2':'30',  'territory':'1'},
+const initilaState  = [
+  {'operator':'1','territory':'1', 'value1':'100',  'value2':'20',   'value3':'1111'},
+  {'operator':'1','territory':'2', 'value1':'10000',  'value2':'20',   'value3':'111'},
+  {'operator':'1','territory':'3', 'value1':'1000',  'value2':'20',   'value3':'111'},
+  {'operator':'2','territory':'1', 'value1':'1000000',  'value2':'20',   'value3':'11111'},
+  {'operator':'3','territory':'1', 'value1':'10000',  'value2':'20',   'value3':'1111'},
+  {'operator':'4','territory':'1', 'value1':'10000',  'value2':'20',   'value3':'11'},
+  {'operator':'1','territory':'1', 'value1':'100',  'value2':'20',   'value3':'1111'},
+  {'operator':'1','territory':'2', 'value1':'10000',  'value2':'20',   'value3':'111'},
+  {'operator':'1','territory':'3', 'value1':'1000',  'value2':'20',   'value3':'111'},
+  {'operator':'2','territory':'1', 'value1':'1000000',  'value2':'20',   'value3':'11111'},
+  {'operator':'3','territory':'1', 'value1':'10000',  'value2':'20',   'value3':'1111'},
+  {'operator':'4','territory':'1', 'value1':'10000',  'value2':'20',   'value3':'11'},
+  {'operator':'1','territory':'1', 'value1':'100',  'value2':'20',   'value3':'1111'},
+  {'operator':'1','territory':'2', 'value1':'10000',  'value2':'20',   'value3':'111'},
+  {'operator':'1','territory':'3', 'value1':'1000',  'value2':'20',   'value3':'111'},
+  {'operator':'2','territory':'1', 'value1':'1000000',  'value2':'20',   'value3':'11111'},
+  {'operator':'3','territory':'1', 'value1':'10000',  'value2':'20',   'value3':'1111'},
+  {'operator':'4','territory':'1', 'value1':'10000',  'value2':'20',   'value3':'11'},
 ];
+
+
 
 function getData(state = initilaState, action) {
   if (action.type === 'ADD_TRACK') {

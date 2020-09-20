@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 
-const COLORS = ['#60baa7','#87cabc','#82c9ba', '#8dcdc0', '#b3ddd4', '#a2d6cb', '#b4ddd5', '#ffffff']
+const COLORS = ['#60baa7', '#8dcdc0', '#b3ddd4', '#ffffff']
 
 export class Map extends Component {
   render() {
@@ -20,8 +20,8 @@ export class Map extends Component {
             <path
               id="CY-01"
               title="Nicosia"
-              class="land"
-              fill= {COLORS[7]}
+              className="land"
+              fill= {COLORS[0]}
               stroke="#818181" 
               strokeWidth="1" 
               strokeLinecap="round" 
@@ -34,8 +34,8 @@ export class Map extends Component {
             <path
               id="CY-02"
               title="Limassol"
-              class="land"
-              fill={COLORS[0]}              
+              className="land"
+              fill={COLORS[1]}              
               stroke="#818181" 
               strokeWidth="1" 
               strokeLinecap="round" 
@@ -47,7 +47,7 @@ export class Map extends Component {
             <path
               id="CY-03"
               title="Larnaca"
-              class="land"
+              className="land"
               stroke="#818181" 
               strokeWidth="1" 
               strokeLinecap="round" 
@@ -60,8 +60,8 @@ export class Map extends Component {
             <path
               id="CY-04"
               title="Famagusta"
-              class="land"
-              fill={COLORS[4]}
+              className="land"
+              fill={COLORS[2]}
               stroke="#818181" 
               strokeWidth="1" 
               strokeLinecap="round" 
@@ -73,8 +73,8 @@ export class Map extends Component {
             <path
               id="CY-05"
               title="Paphos"
-              class="land"
-              fill={COLORS[5]}
+              className="land"
+              fill={COLORS[2]}
               stroke="#818181" 
               strokeWidth="1" 
               strokeLinecap="round" 
@@ -86,8 +86,8 @@ export class Map extends Component {
             <path
               id="CY-06"
               title="Kyrenia"
-              class="land"
-              fill={COLORS[2]}
+              className="land"
+              fill={COLORS[1]}
               stroke="#818181" 
               strokeWidth="1" 
               strokeLinecap="round" 
