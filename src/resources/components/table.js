@@ -1,61 +1,71 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 
-const cellEditProp = {
-  mode: 'click'
-};
+
+
+const columns = [
+  {
+    dataField: 'id',
+    text: '#',   
+    sort: true,
+    footer:"",
+    sort: true, 
+   
+  },{
+  dataField: 'operator',
+  text: 'operator',   
+  sort: true,
+  footer: '',
+  sort: true, 
+}, {
+  dataField: 'territory',
+  text: 'territory',
+  sort: true,    
+  footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0)
+}, {
+  dataField: 'value1',
+  text: 'value1', 
+  sort: true,  
+  footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0)
+}, {
+  dataField: 'value2',
+  text: 'value2', 
+  sort: true,  
+  footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0)
+}, {
+  dataField: 'value3',
+  text: 'value3',  
+  sort: true,  
+  footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0)
+}];
 
 class TableBasic extends React.Component {
   constructor(props) {
     super(props);
     this.products = this.props.data
-    this.handleClick = this.handleClick.bind(this)
-    this.options = {
-      onPageChange: this.onPageChange.bind(this),
-      onSizePerPageList: this.sizePerPageListChange.bind(this),
-      hideSizePerPage: true,
-    };
-  }
 
-  handleClick(e) {
-    alert()
-  }
-
-
-  sizePerPageListChange(sizePerPage) {
-   // alert(`sizePerPage: ${sizePerPage}`);
-  }
-
-  onPageChange(page, sizePerPage) {
-   // alert(`page: ${page}, sizePerPage: ${sizePerPage}`);
-  }
-
-
+    }
+  
   render() {
     return (
       <div>
-        <BootstrapTable 
-          data={this.products} 
-          onClick={this.handleClick} 
-          cellEdit={ cellEditProp }
-          pagination
-          options={ this.options }
-          striped hover
-          tableStyle={ { margin: 0 } }
-          headerStyle={ {  margin: 0 } }
-          
-        >
-          <TableHeaderColumn dataField='operator' isKey={true} dataSort={true}>Product ID</TableHeaderColumn>
-          <TableHeaderColumn dataField='territory' dataSort={true}>Product Name</TableHeaderColumn>
-          <TableHeaderColumn dataField='value1' dataSort={true} >Product Price</TableHeaderColumn>
-          <TableHeaderColumn dataField='value2' dataSort={true} >Product Price</TableHeaderColumn>
-          <TableHeaderColumn dataField='value3' dataSort={true} >Product Price</TableHeaderColumn>
-        </BootstrapTable>
+        <BootstrapTable
+          keyField="id"
+          data={  this.products }
+          columns={ columns }
+          bootstrap4
+          pagination={ paginationFactory() }
+          striped
+          hover
+        
+        />
       </div>
     );
   }
 }
+
 
 export default connect(
   state => ({
@@ -63,4 +73,6 @@ export default connect(
   }),
   dispatch => ({})
 )(TableBasic);
+
+//https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Footer&selectedStory=Function%20Footer&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
 
