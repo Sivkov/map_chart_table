@@ -9,7 +9,13 @@ body {
     display: none;
 }
 
-.red {
+
+
+.demo-sorting-asc {
     background-color: blue;
+}
+
+.demo-sorting-desc {
+    background-color: green;
 }
 

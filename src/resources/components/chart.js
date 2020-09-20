@@ -7,27 +7,42 @@ import { connect } from 'react-redux';
 class LineChart extends React.Component {
   constructor(props) {
     super(props);
+    this.labels =[]
+    this.data = []
+    this.props.data.map((item, index) => this.labels.push(item['operator']))
+    this.props.data.map((item, index) => this.data.push(item['value3']))
+
+
     this.state = {
     charType: 'Line',
     data :  {
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      labels: this.labels,
       datasets: [
         {
           label: "First dataset",
-          data: [33, 53, 85, 41, 44, 65],
+          data: this.data,
           fill: true,
-          backgroundColor: "rgba(75,192,192,0.2)",
-          borderColor: "rgba(75,192,192,1)"
+          borderColor: "rgb(108, 117, 125);",
+          backgroundColor: [
+            'rgb(0, 123, 255)',
+            'rgb(102, 16, 242)',
+            'rgb(111, 66, 193)',
+            'rgb(32, 201, 151)',
+            'rgb(23, 162, 184)',
+            'rgb(0, 123, 255)',
+            'rgb(102, 16, 242)',
+            'rgb(111, 66, 193)',
+            'rgb(32, 201, 151)',
+            'rgb(23, 162, 184)', 
+            'rgb(0, 123, 255)',
+            'rgb(102, 16, 242)',
+            'rgb(111, 66, 193)',
+            'rgb(32, 201, 151)',
+            'rgb(23, 162, 184)',
+          ]
         },
-        {
-          label: "Second dataset",
-          data: [33, 25, 35, 51, 54, 76],
-          fill: false,
-          borderColor: "#742774"
-        }
       ]
     },
-
     options : {
         title: {
           display: true,
@@ -55,7 +70,6 @@ class LineChart extends React.Component {
       }
     }
     this.charTypeChange = this.charTypeChange.bind(this);
-
   }
 
   charTypeChange (e) {

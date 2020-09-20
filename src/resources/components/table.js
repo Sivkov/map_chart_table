@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-
+const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => (
+  sortOrder === 'asc' ? 'demo-sorting-asc' : 'demo-sorting-desc'
+);
 
 class TableBasic extends React.Component {
   constructor(props) {
     super(props);
     this.products = this.props.data
     this.current = false
+
     this.columns = [
       {
         dataField: 'id',
@@ -16,6 +19,7 @@ class TableBasic extends React.Component {
         sort: true,
         footer: "",
         sort: true,
+        headerSortingClasses
 
       }, {
         dataField: 'operator',
@@ -23,16 +27,20 @@ class TableBasic extends React.Component {
         sort: true,
         footer: '',
         sort: true,
+        headerSortingClasses
+
       }, {
         dataField: 'territory',
         text: 'territory',
         sort: true,
-        footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0)
+        headerSortingClasses,
+        footer: ''
       }, {
         dataField: 'value1',
         text: 'value1',
         sort: true,
-        footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0),
+        headerSortingClasses,
+        footer: columnData => Math.floor ( columnData.reduce((acc, item) => acc + Number(item), 0) / columnData.length ),
         headerEvents: {
           onClick: (e, column, columnIndex) => {
             this.current = columnIndex;
@@ -45,7 +53,8 @@ class TableBasic extends React.Component {
         dataField: 'value2',
         text: 'value2',
         sort: true,
-        footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0),
+        headerSortingClasses,
+        footer: columnData => Math.floor (  columnData.reduce((acc, item) => acc + Number(item), 0) / columnData.length  ),
         headerEvents: {
           onClick: (e, column, columnIndex) => {
             this.current = columnIndex
@@ -56,7 +65,8 @@ class TableBasic extends React.Component {
         dataField: 'value3',
         text: 'value3',
         sort: true,
-        footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0),
+        headerSortingClasses,
+        footer: columnData => Math.floor ( columnData.reduce((acc, item) => acc + Number(item), 0) / columnData.length),
         headerEvents: {
           onClick: (e, column, columnIndex) => {
             this.current = columnIndex

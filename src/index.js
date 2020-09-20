@@ -5,28 +5,22 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
+let initilaState = []
+let rows = 10;
+let operators = 3
+for (let i=0; i <rows; i++) {
+  initilaState.push({})
+}
 
-const initilaState = [
-  { 'id': 1,  'operator': 'operator1',  'territory': 1, 'value1': 101, 'value2': 201, 'value3': '1111' },
-  { 'id': 2,  'operator': 'operator1',  'territory': 2, 'value1': 102, 'value2': 202, 'value3': '111' },
-  { 'id': 3,  'operator': 'operator1',  'territory': 3, 'value1': 102, 'value2': 203, 'value3': '111' },
-  { 'id': 4,  'operator': 'operator2',  'territory': 1, 'value1': 105, 'value2': 201, 'value3': '11111' },
-  { 'id': 5,  'operator': 'operator3',  'territory': 1, 'value1': 100, 'value2': 202, 'value3': '1111' },
-  { 'id': 6,  'operator': 'operator4',  'territory': 1, 'value1': 110, 'value2': 203, 'value3': '11' },
-  { 'id': 7,  'operator': 'operator5',  'territory': 1, 'value1': 100, 'value2': 201, 'value3': '1111' },
-  { 'id': 8,  'operator': 'operator6',  'territory': 2, 'value1': 110, 'value2': 202, 'value3': '111' },
-  { 'id': 9,  'operator': 'operator7',  'territory': 3, 'value1': 100, 'value2': 203, 'value3': '111' },
-  { 'id': 10, 'operator': 'operator8',  'territory': 1, 'value1': 100, 'value2': 201, 'value3': '11111' },
-  { 'id': 11, 'operator': 'operator9',  'territory': 1, 'value1': 100, 'value2': 202, 'value3': '1111' },
-  { 'id': 12, 'operator': 'operator10', 'territory': 1, 'value1': 100, 'value2': 203, 'value3': '11' },
-  { 'id': 13, 'operator': 'operator11', 'territory': 1, 'value1': 100, 'value2': 201, 'value3': '1111' },
-  { 'id': 14, 'operator': 'operator12', 'territory': 3, 'value1': 100, 'value2': 202, 'value3': '111' },
-  { 'id': 15, 'operator': 'operator13', 'territory': 1, 'value1': 100, 'value2': 203, 'value3': '11111' },
-  { 'id': 17, 'operator': 'operator14', 'territory': 1, 'value1': 100, 'value2': 201, 'value3': '1111' },
-  { 'id': 18, 'operator': 'operator15', 'territory': 1, 'value1': 100, 'value2': 203, 'value3': '11' },
-];
+initilaState.forEach((id, index) => {
+  id['id']= index+1;
+  id['operator']= 'operator'+Math.floor(Math.random() * operators+1);
+  id['value1'] = Math.floor(Math.random() * 101);
+  id['value2'] = Math.floor(Math.random() * 101);
+  id['value3'] = Math.floor(Math.random() * 101);
+  id['territory'] = Math.floor(Math.random() * 6)+1;
 
-
+})
 
 function getData(state = initilaState, action) {
   if (action.type === 'ADD_TRACK') {
