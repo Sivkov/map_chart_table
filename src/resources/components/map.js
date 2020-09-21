@@ -8,7 +8,7 @@ export class Map extends Component {
   render() {
     return (
       <div className='container'>
-          <div className='h3'>Карта регионов</div>
+          <div className='h3'>Карта регионов ( {this.props.data[0]['value']} ).</div>
           <div className='map__container'>
 
 

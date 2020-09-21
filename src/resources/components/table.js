@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import { Nav } from 'react-bootstrap';
+import { SET_VALUE } from '../actions/actions';
 
 
 const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => (
@@ -12,8 +12,9 @@ const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => (
 class TableBasic extends React.Component {
   constructor(props) {
     super(props);
-    this.products = this.props.data
+    this.products = this.props.data[1]['data']
     this.current = false
+    this.set_chart = this.set_chart.bind(this)
 
     this.columns = [
       {
@@ -48,6 +49,7 @@ class TableBasic extends React.Component {
           onClick: (e, column, columnIndex) => {
             this.current = columnIndex;
             console.log(this.current)
+            this.set_chart(this.current)
             
           }
         }
@@ -62,6 +64,7 @@ class TableBasic extends React.Component {
           onClick: (e, column, columnIndex) => {
             this.current = columnIndex
             console.log(this.current)
+            this.set_chart(this.current)
           }
         }
       }, {
@@ -74,6 +77,7 @@ class TableBasic extends React.Component {
           onClick: (e, column, columnIndex) => {
             this.current = columnIndex
             console.log(this.current)
+            this.set_chart(this.current)
           }
         }
       }];
@@ -83,6 +87,13 @@ class TableBasic extends React.Component {
     this.columns.forEach((id, index) => {
       /*  */
     })
+  }
+
+   set_chart (item) {
+    return {
+      type: 'SET_VALUE',
+      value: item
+    }
   }
 
   render() {
@@ -99,10 +110,7 @@ class TableBasic extends React.Component {
             striped
             hover  />
           </div>
-              
-
-       
-      
+          
     );
   }
 }
@@ -111,8 +119,6 @@ export default connect(
   state => ({
     data: state
   }),
-  dispatch => ({})
+  dispatch => ({  
+    SET_VALUE: 1 }) 
 )(TableBasic);
-
-//https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Footer&selectedStory=Function%20Footer&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
-

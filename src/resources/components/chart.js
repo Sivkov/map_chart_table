@@ -10,8 +10,8 @@ class LineChart extends React.Component {
     super(props);
     this.labels =[]
     this.data = []
-    this.props.data.map((item, index) => this.labels.push(item['operator']))
-    this.props.data.map((item, index) => this.data.push(item['value3']))
+    this.props.data[1]['data'].map((item, index) => this.labels.push(item['operator']))
+    this.props.data[1]['data'].map((item, index) => this.data.push(item[this.props.data[0]['value']]))
 
 
     this.state = {
@@ -82,7 +82,7 @@ class LineChart extends React.Component {
 
       return (
         <div className='container'>
-          <div className='h3'>Диаграмма показателей</div>
+          <div className='h3'>Диаграмма показателя {this.props.data[0]['value']}</div>
 
 
         <ButtonGroup >
@@ -91,17 +91,17 @@ class LineChart extends React.Component {
           <Button variant="primary" onClick={ this.charTypeChange }  data-chart="Bar">Bar</Button>
         </ButtonGroup >
         
-          <div className={ this.state.charType === 'Line'?  "" : "nodisplay" }>
+          <div className={ this.state.charType  === 'Line'?  "" : "nodisplay" }>
             <Line data={this.state.data} 
               legend={this.state.legend} 
               options={this.state.options} />
           </div>
-          <div  className={ this.state.charType === 'Pie' ?  "" : "nodisplay" }>
+          <div  className={ this.state.charType   === 'Pie' ?  "" : "nodisplay" }>
             <Pie data={this.state.data}
               legend={this.state.legend} 
               options={this.state.options} />
           </div>
-          <div  className={ this.state.charType === 'Bar' ?  "" : "nodisplay" }>
+          <div  className={ this.state.charType   === 'Bar' ?  "" : "nodisplay" }>
             <Bar data={this.state.data} 
               legend={this.state.legend} 
               options={this.state.options} />

@@ -5,14 +5,14 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-let initilaState = []
+let initilaState = [{'value':'value2'},{data:[]}]
 let rows = 10;
 let operators = 3
 for (let i=0; i <rows; i++) {
-  initilaState.push({})
+  initilaState[1]['data'].push({})
 }
 
-initilaState.forEach((id, index) => {
+initilaState[1]['data'].forEach((id, index) => {
   id['id']= index+1;
   id['operator']= 'operator'+Math.floor(Math.random() * operators+1);
   id['value1'] = Math.floor(Math.random() * 101);
@@ -23,11 +23,9 @@ initilaState.forEach((id, index) => {
 })
 
 function getData(state = initilaState, action) {
-  if (action.type === 'ADD_DATA') {
-    return [
-      ...state,
-      action.payload
-    ];
+  if (action.type === 'SET_VALUE') {
+    alert ()
+    return [ ...state, action.payload];
   }
   return state;
 }
