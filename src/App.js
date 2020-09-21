@@ -9,8 +9,8 @@ import { connect } from 'react-redux';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Main />
+      <div className="app">
+        <Main  className="mainContainer" />
       </div>
     );
   }

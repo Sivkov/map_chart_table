@@ -1,7 +1,8 @@
 import React from "react";
 import { Line, Pie, Bar } from "react-chartjs-2";
-import { Button, ButtonGroup  } from 'react-bootstrap';
+import { Button, ButtonGroup, Nav  } from 'react-bootstrap';
 import { connect } from 'react-redux';
+
 
 
 class LineChart extends React.Component {
@@ -22,23 +23,23 @@ class LineChart extends React.Component {
           label: "First dataset",
           data: this.data,
           fill: true,
-          borderColor: "rgb(108, 117, 125);",
+          borderColor: "rgba(108, 117, 125, 0.5);",
           backgroundColor: [
-            'rgb(0, 123, 255)',
-            'rgb(102, 16, 242)',
-            'rgb(111, 66, 193)',
-            'rgb(32, 201, 151)',
-            'rgb(23, 162, 184)',
-            'rgb(0, 123, 255)',
-            'rgb(102, 16, 242)',
-            'rgb(111, 66, 193)',
-            'rgb(32, 201, 151)',
-            'rgb(23, 162, 184)', 
-            'rgb(0, 123, 255)',
-            'rgb(102, 16, 242)',
-            'rgb(111, 66, 193)',
-            'rgb(32, 201, 151)',
-            'rgb(23, 162, 184)',
+            'rgba(0, 123, 255, 0.5)',
+            'rgba(102, 16, 242, 0.5)',
+            'rgba(111, 66, 193, 0.5)',
+            'rgba(32, 201, 151, 0.5)',
+            'rgba(23, 162, 184, 0.5)',
+            'rgba(0, 123, 255, 0.5)',
+            'rgba(102, 16, 242, 0.5)',
+            'rgba(111, 66, 193, 0.5)',
+            'rgba(32, 201, 151, 0.5)',
+            'rgba(23, 162, 184, 0.5)', 
+            'rgba(0, 123, 255, 0.5)',
+            'rgba(102, 16, 242, 0.5)',
+            'rgba(111, 66, 193, 0.5)',
+            'rgba(32, 201, 151, 0.5)',
+            'rgba(23, 162, 184, 0.5)',
           ]
         },
       ]
@@ -80,27 +81,32 @@ class LineChart extends React.Component {
     render() {
 
       return (
-      <div>
+        <div className='container'>
+          <div className='h3'>Диаграмма показателей</div>
+
+
         <ButtonGroup >
-          <Button bsStyle="primary" onClick={ this.charTypeChange }  data-chart="Line">Line</Button>
-          <Button bsStyle="primary" onClick={ this.charTypeChange }  data-chart="Pie">Pie</Button>
-          <Button bsStyle="primary" onClick={ this.charTypeChange }  data-chart="Bar">Bar</Button>
+          <Button variant="primary" onClick={ this.charTypeChange }  data-chart="Line">Line</Button>
+          <Button variant="primary" onClick={ this.charTypeChange }  data-chart="Pie">Pie</Button>
+          <Button variant="primary" onClick={ this.charTypeChange }  data-chart="Bar">Bar</Button>
         </ButtonGroup >
-        <div className={ this.state.charType === 'Line'?  "" : "nodisplay" }>
-          <Line data={this.state.data} 
-            legend={this.state.legend} 
-            options={this.state.options} />
-        </div>
-        <div  className={ this.state.charType === 'Pie' ?  "" : "nodisplay" }>
-          <Pie data={this.state.data}
-            legend={this.state.legend} 
-            options={this.state.options} />
-        </div>
-        <div  className={ this.state.charType === 'Bar' ?  "" : "nodisplay" }>
-          <Bar data={this.state.data} 
-            legend={this.state.legend} 
-            options={this.state.options} />
-        </div>
+        
+          <div className={ this.state.charType === 'Line'?  "" : "nodisplay" }>
+            <Line data={this.state.data} 
+              legend={this.state.legend} 
+              options={this.state.options} />
+          </div>
+          <div  className={ this.state.charType === 'Pie' ?  "" : "nodisplay" }>
+            <Pie data={this.state.data}
+              legend={this.state.legend} 
+              options={this.state.options} />
+          </div>
+          <div  className={ this.state.charType === 'Bar' ?  "" : "nodisplay" }>
+            <Bar data={this.state.data} 
+              legend={this.state.legend} 
+              options={this.state.options} />
+          </div>
+
       </div>
       );
     }

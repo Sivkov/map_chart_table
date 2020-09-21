@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import { Nav } from 'react-bootstrap';
+
+
 const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => (
   sortOrder === 'asc' ? 'demo-sorting-asc' : 'demo-sorting-desc'
 );
@@ -84,18 +87,22 @@ class TableBasic extends React.Component {
 
   render() {
     return (
-      <div>
-        <BootstrapTable
-          keyField="id"
-          data={this.products}
-          columns={this.columns}
-          bootstrap4
-          pagination={paginationFactory()}
-          striped
-          hover
+          <div className='container'>
+            <div className='h3'>Таблица показателей операторов</div>
 
-        />
-      </div>
+            <BootstrapTable
+            keyField="id"
+            data={this.products}
+            columns={this.columns}
+            bootstrap4
+            pagination={paginationFactory()}
+            striped
+            hover  />
+          </div>
+              
+
+       
+      
     );
   }
 }

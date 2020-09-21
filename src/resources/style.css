@@ -1,21 +1,122 @@
-
 body {
-    padding:0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+
+.app {
+    padding:10px 10px;
     margin:0;
     font-family: 'Roboto', sans-serif;
+    color: #73879C;
+    font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.471;
+    background: #F7F7F7;
+    width: 100%;
+
+}
+
+.h3 {
+
+    font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    text-align: left;
+    color: #73879C;
+    font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+    box-sizing: border-box;
+    line-height: 1.2;
+    font-size: 1.75rem;
+    margin: 0;
+    font-weight: normal;
+}
+
+.mainContainer {
+    margin: 1vw 1vw;
+    display: flex;
+    justify-content: flex-start;
+    height: 100%;
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+    opacity: 1;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease; 
+
+}
+
+.container {
+    position: relative;  
+    min-width: 300px;
+    width: 32% !important;
+    height: 800px !important;
+    padding: 10px 10px;
+    margin: 10px 10px ;
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #E6E9ED;
+  
+}
+
+.map__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .nodisplay {
     display: none;
 }
 
-
-
 .demo-sorting-asc {
-    background-color: blue;
+    background-color:rgb(32, 201, 151);   
 }
 
 .demo-sorting-desc {
-    background-color: green;
+    background-color:rgb(23, 162, 184);
 }
+ h{
+-webkit-tap-highlight-color: transparent;
+--blue: #007bff;
+--indigo: #6610f2;
+--purple: #6f42c1;
+--pink: #e83e8c;
+--red: #dc3545;
+--orange: #fd7e14;
+--yellow: #ffc107;
+--green: #28a745;
+--teal: #20c997;
+--cyan: #17a2b8;
+--white: #fff;
+--gray: #6c757d;
+--gray-dark: #343a40;
+--primary: #007bff;
+--secondary: #6c757d;
+--success: #28a745;
+--info: #17a2b8;
+--warning: #ffc107;
+--danger: #dc3545;
+--light: #f8f9fa;
+--dark: #343a40;
+--breakpoint-xs: 0;
+--breakpoint-sm: 576px;
+--breakpoint-md: 768px;
+--breakpoint-lg: 992px;
+--breakpoint-xl: 1200px;
+--font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+--font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+text-align: left;
+color: #73879C;
+font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+box-sizing: border-box;
+line-height: 1.2;
+font-size: 1.75rem;
+margin: 0;
+font-weight: normal;
+ }
 

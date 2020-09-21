@@ -23,7 +23,7 @@ initilaState.forEach((id, index) => {
 })
 
 function getData(state = initilaState, action) {
-  if (action.type === 'ADD_TRACK') {
+  if (action.type === 'ADD_DATA') {
     return [
       ...state,
       action.payload
@@ -45,4 +45,3 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
-
