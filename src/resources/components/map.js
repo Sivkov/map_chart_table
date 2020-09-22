@@ -5,10 +5,18 @@ import { connect } from 'react-redux';
 const COLORS = ['#60baa7', '#8dcdc0', '#b3ddd4', '#ffffff']
 
 export class Map extends Component {
+
+  constructor(props) {
+    super(props);
+    this.dataMap = this.createData
+    this.value = this.props.data[0].value
+  }
+
+
   render() {
     return (
       <div className='container'>
-          <div className='h3'>Карта регионов ( {this.props.data[0]['value']} ).</div>
+          <div className='h3'>Карта регионов ( {this.value} ).</div>
           <div className='map__container'>
 
 

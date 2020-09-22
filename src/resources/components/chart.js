@@ -8,12 +8,8 @@ import { connect } from 'react-redux';
 class LineChart extends React.Component {
   constructor(props) {
     super(props);
-    this.labels =[]
-    this.data = []
-    this.props.data[1]['data'].map((item, index) => this.labels.push(item['operator']))
-    this.props.data[1]['data'].map((item, index) => this.data.push(item[this.props.data[0]['value']]))
-
-
+    this.labels = this.props.data[2].labelCharts
+    this.data = this.props.data[4].chartData
     this.state = {
     charType: 'Line',
     data :  {
@@ -47,7 +43,7 @@ class LineChart extends React.Component {
     options : {
         title: {
           display: true,
-          text: "Chart Title"
+          text: this.props.data[0].value
         },
         scales: {
           yAxes: [
