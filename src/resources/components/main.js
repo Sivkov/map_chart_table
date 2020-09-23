@@ -6,18 +6,10 @@ import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 
-const regionData =  [];
-const chartData =[]
 
 export class Main extends Component  {
-  constructor(props) {
-    super(props);
-    this.state = {
-     data:this.props.data }
-  }
 
-
-  render() {
+render() {
 
     return (
       <div  className="mainContainer">
@@ -29,10 +21,4 @@ export class Main extends Component  {
   }
 
 }
-
-export default connect(
-  state => ({
-    data: state
-  }),
-  dispatch => ({})
-)(Main);
+export default connect( state => ({ data: state  }),  )(Main);

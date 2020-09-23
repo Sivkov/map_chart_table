@@ -4,12 +4,12 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { SET_VALUE } from './resources/actions/actions';
 
 
-let initilaState = { 'value': 'value3' ,  data: [] ,  labelCharts: [] , mapData: [] ,  chartData: [] ,  regionTable: [] ,  operatorTable: [] }
+let initilaState = { 'value': 'value1' ,  data: [] ,  labelCharts: [] , mapData: [] ,  chartData: [] ,  regionTable: [] ,  operatorTable: [] }
 let rows = 110;
 let operators = 13;
+const TERRITORY = 6;
 for (let i = 0; i < rows; i++) {
   initilaState['data'].push({})
 }
@@ -20,7 +20,7 @@ initilaState['data'].forEach((id, index) => {
   id['value1'] = Math.floor(Math.random() * 101);
   id['value2'] = Math.floor(Math.random() * 101);
   id['value3'] = Math.floor(Math.random() * 101);
-  id['territory'] = Math.floor(Math.random() * 6) + 1;
+  id['territory'] = Math.floor(Math.random() * TERRITORY) + 1;
 })
 
 initilaState['mapData'] = createMapData(initilaState['data'], initilaState['value'])
@@ -72,6 +72,10 @@ function getData(state = initilaState, action) {
   switch (action.type) {
     case 'SET_VALUE':
       return { ...state, value: action.payload }
+    case 'SET_MAP':
+      return { ...state, mapData: action.payload }
+    case 'SET_CHART':
+      return { ...state, chartData: action.payload }
 
     default:
       return state;

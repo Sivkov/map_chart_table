@@ -11,21 +11,24 @@ export class Map extends Component {
   constructor(props) {
     super(props);
     this.dataMap = this.props.data.mapData
-    this.value = this.props.data.value
-    this.state = { maxData :  Math.max(...this.dataMap.map( a => a.value)),
-                   minData :  Math.min(...this.dataMap.map( a => a.value)),
+    this.reDrawMap = this.reDrawMap.bind(this)
+    this.state = { maxData : 100 /* Math.max(...this.dataMap.map( a => a.value)) */,
+                   minData : 1 /* Math.min(...this.dataMap.map( a => a.value)) */,
                    dataMap :  this.props.data.mapData
     }
   }
 
-  componentDidMount () {
+  reDrawMap () {
     for (let i=0; i< REGIONS ; i++) {
-      // sort value
+       // sort value
       let cData = this.props.data.mapData[i].value
       let currentColor = Math.ceil( (cData - this.state.minData) / ((this.state.maxData - this.state.minData)/(COLORS.length-1))  )       
-      jQuery(`#CY-0${i}`).attr("fill" , `${COLORS[currentColor]}` )
+      jQuery(`#CY-0${i}`).attr("fill" , `${COLORS[currentColor]}` ) 
     }
+  }
 
+  componentDidUpdate () {
+    this.reDrawMap()
   }
 
   render() {
@@ -131,9 +134,4 @@ export class Map extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    data: state
-  }),
-  dispatch => ({})
-)(Map);
+export default connect( state => ({data: state }))(Map);
