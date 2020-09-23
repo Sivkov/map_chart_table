@@ -1,32 +1,47 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import jQuery from 'jquery';
 
 
-const COLORS = ['#60baa7', '#8dcdc0', '#b3ddd4', '#ffffff']
+const COLORS = ['#60baa7', '#8dcdc0', '#b3ddd4', '#62bba8']
+const REGIONS = 6;
 
 export class Map extends Component {
 
   constructor(props) {
     super(props);
-    this.dataMap = this.createData
-    this.value = this.props.data[0].value
+    this.dataMap = this.props.data.mapData
+    this.value = this.props.data.value
+    this.state = { maxData :  Math.max(...this.dataMap.map( a => a.value)),
+                   minData :  Math.min(...this.dataMap.map( a => a.value)),
+                   dataMap :  this.props.data.mapData
+    }
   }
 
+  componentDidMount () {
+    for (let i=0; i< REGIONS ; i++) {
+      // sort value
+      let cData = this.props.data.mapData[i].value
+      let currentColor = Math.ceil( (cData - this.state.minData) / ((this.state.maxData - this.state.minData)/(COLORS.length-1))  )       
+      jQuery(`#CY-0${i}`).attr("fill" , `${COLORS[currentColor]}` )
+    }
+
+  }
 
   render() {
     return (
       <div className='container'>
-          <div className='h3'>Карта регионов ( {this.value} ).</div>
+          <div className='h3'>Карта регионов {this.props.data['value']}</div>
           <div className='map__container'>
 
-
-            <svg
+            <svg className='svg'
+            viewBox="0 0 600 400"
             xmlns="http://www.w3.org/2000/svg"
             amcharts="http://amcharts.com/ammap"
             xlink="http://www.w3.org/1999/xlink"
             version="1.1"
-            width="650"
-            height="550"
+            width="500"
+            height="auto"
           >
             <g>
               <path

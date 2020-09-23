@@ -72,6 +72,9 @@ body {
 
 }
 
+.svg {
+    object-fit: cover;
+}
 .nodisplay {
     display: none;
 }

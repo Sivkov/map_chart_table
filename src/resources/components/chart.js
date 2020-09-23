@@ -8,8 +8,8 @@ import { connect } from 'react-redux';
 class LineChart extends React.Component {
   constructor(props) {
     super(props);
-    this.labels = this.props.data[2].labelCharts
-    this.data = this.props.data[4].chartData
+    this.labels = this.props.data.labelCharts
+    this.data = this.props.data.chartData
     this.state = {
     charType: 'Line',
     data :  {
@@ -43,7 +43,7 @@ class LineChart extends React.Component {
     options : {
         title: {
           display: true,
-          text: this.props.data[0].value
+          text: this.props.data.value
         },
         scales: {
           yAxes: [
@@ -78,7 +78,7 @@ class LineChart extends React.Component {
 
       return (
         <div className='container'>
-          <div className='h3'>Диаграмма показателя {this.props.data[0]['value']}</div>
+          <div className='h3'>Диаграмма показателя {this.props.data['value']}</div>
 
 
         <ButtonGroup >

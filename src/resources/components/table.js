@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import { bindActionCreators } from 'redux';
 import { SET_VALUE } from '../actions/actions';
 
 
@@ -12,9 +13,9 @@ const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => (
 class TableBasic extends React.Component {
   constructor(props) {
     super(props);
-    this.products = this.props.data[1]['data']
+    this.products = this.props.data['data']
     this.current = false
-    this.set_chart = this.set_chart.bind(this)
+    this.set_chart = this.props.SET_VALUE
 
     this.columns = [
       {
@@ -47,7 +48,7 @@ class TableBasic extends React.Component {
         footer: columnData => Math.floor ( columnData.reduce((acc, item) => acc + Number(item), 0) / columnData.length ),
         headerEvents: {
           onClick: (e, column, columnIndex) => {
-            this.current = columnIndex;
+            this.current = 'value'+(columnIndex-2);
             console.log(this.current)
             this.set_chart(this.current)
             
@@ -62,7 +63,7 @@ class TableBasic extends React.Component {
         footer: columnData => Math.floor (  columnData.reduce((acc, item) => acc + Number(item), 0) / columnData.length  ),
         headerEvents: {
           onClick: (e, column, columnIndex) => {
-            this.current = columnIndex
+            this.current = 'value'+(columnIndex-2);
             console.log(this.current)
             this.set_chart(this.current)
           }
@@ -75,32 +76,26 @@ class TableBasic extends React.Component {
         footer: columnData => Math.floor ( columnData.reduce((acc, item) => acc + Number(item), 0) / columnData.length),
         headerEvents: {
           onClick: (e, column, columnIndex) => {
-            this.current = columnIndex
+            this.current = 'value'+(columnIndex-2);
             console.log(this.current)
             this.set_chart(this.current)
           }
         }
       }];
+
   }
 
-  componentDidMount() {
-    this.columns.forEach((id, index) => {
-      /*  */
-    })
-  }
-
-   set_chart (item) {
+  set_chart (item) {
     return {
       type: 'SET_VALUE',
-      value: item
+      payload: 'value2'
     }
   }
 
   render() {
     return (
           <div className='container'>
-            <div className='h3'>Таблица показателей операторов</div>
-
+            <div className='h3'>Диаграмма показателя {this.props.data['value']}</div>
             <BootstrapTable
             keyField="id"
             data={this.products}
@@ -115,10 +110,13 @@ class TableBasic extends React.Component {
   }
 }
 
-export default connect(
-  state => ({
-    data: state
-  }),
-  dispatch => ({  
-    SET_VALUE: 1 }) 
-)(TableBasic);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    SET_VALUE: bindActionCreators(SET_VALUE, dispatch ) 
+  }
+}
+
+
+export default connect( state => ({ data: state  }), mapDispatchToProps )(TableBasic);
+
+

@@ -12,6 +12,8 @@ const chartData =[]
 export class Main extends Component  {
   constructor(props) {
     super(props);
+    this.state = {
+     data:this.props.data }
   }
 
 

@@ -4,15 +4,17 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import { SET_VALUE } from './resources/actions/actions';
 
-let initilaState = [{ 'value': 'value1' }, { data: [] }, { labelCharts: [] }, { mapData: [] }, { chartData: [] }, { regionTable: [] }, { operatorTable: [] }]
+
+let initilaState = { 'value': 'value3' ,  data: [] ,  labelCharts: [] , mapData: [] ,  chartData: [] ,  regionTable: [] ,  operatorTable: [] }
 let rows = 110;
 let operators = 13;
 for (let i = 0; i < rows; i++) {
-  initilaState[1]['data'].push({})
+  initilaState['data'].push({})
 }
 
-initilaState[1]['data'].forEach((id, index) => {
+initilaState['data'].forEach((id, index) => {
   id['id'] = index + 1;
   id['operator'] = 'operator' + Math.floor(Math.random() * operators + 1);
   id['value1'] = Math.floor(Math.random() * 101);
@@ -21,10 +23,10 @@ initilaState[1]['data'].forEach((id, index) => {
   id['territory'] = Math.floor(Math.random() * 6) + 1;
 })
 
-initilaState[3]['mapData'] = createMapData(initilaState[1]['data'], initilaState[0]['value'])
-let operatorsData = createChartData(initilaState[1]['data'], initilaState[0]['value'])
-operatorsData.map((item, index) => initilaState[2]['labelCharts'].push(item['operator']))
-operatorsData.map((item, index) => initilaState[4]['chartData'].push(item['value']))
+initilaState['mapData'] = createMapData(initilaState['data'], initilaState['value'])
+let operatorsData = createChartData(initilaState['data'], initilaState['value'])
+operatorsData.map((item, index) => initilaState['labelCharts'].push(item['operator']))
+operatorsData.map((item, index) => initilaState['chartData'].push(item['value']))
 
 function createMapData(data, value = 'value1') {
 
@@ -67,11 +69,13 @@ function createChartData(data, value = 'value1') {
 }
 
 function getData(state = initilaState, action) {
-  if (action.type === 'SET_VALUE') {
-    alert()
-    return [...state, action.payload];
+  switch (action.type) {
+    case 'SET_VALUE':
+      return { ...state, value: action.payload }
+
+    default:
+      return state;
   }
-  return state;
 }
 
 const store = createStore(getData);
