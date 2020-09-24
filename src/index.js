@@ -6,7 +6,16 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 
-let initilaState = { 'value': 'value1' ,  data: [] ,  labelCharts: [] , mapData: [] ,  chartData: [] ,  regionTable: [] ,  operatorTable: [] }
+let initilaState = { 
+  'value': 'value1' ,  
+  data: [] ,  
+  labelCharts: [] , 
+  mapData: [] ,  
+  chartData: [] ,  
+  regionTable: [] ,  
+  operatorTable: [],
+}
+
 let rows = 110;
 let operators = 13;
 const TERRITORY = 6;
@@ -18,8 +27,8 @@ initilaState['data'].forEach((id, index) => {
   id['id'] = index + 1;
   id['operator'] = 'operator' + Math.floor(Math.random() * operators + 1);
   id['value1'] = Math.floor(Math.random() * 101);
-  id['value2'] = Math.floor(Math.random() * 101);
-  id['value3'] = Math.floor(Math.random() * 101);
+  id['value2'] = Math.floor(Math.random() * 201);
+  id['value3'] = Math.floor(Math.random() * 90);
   id['territory'] = Math.floor(Math.random() * TERRITORY) + 1;
 })
 
@@ -44,7 +53,7 @@ function createMapData(data, value = 'value1') {
     }
   })
 
-  return result
+  return result;
 
 }
 
@@ -64,9 +73,11 @@ function createChartData(data, value = 'value1') {
     }
   })
 
+  console.log ( result)
   return result
 
 }
+
 
 function getData(state = initilaState, action) {
   switch (action.type) {
@@ -95,3 +106,6 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+
+

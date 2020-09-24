@@ -8,16 +8,14 @@ import { connect } from 'react-redux';
 class LineChart extends React.Component {
   constructor(props) {
     super(props);
-    this.labels = this.props.data.labelCharts
-    this.data = this.props.data.chartData
     this.state = {
     charType: 'Line',
     data :  {
-      labels: this.labels,
+      labels: this.props.data.labelCharts,
       datasets: [
         {
           label: "First dataset",
-          data: this.data,
+          data:  [],
           fill: true,
           borderColor: "rgba(108, 117, 125, 0.5);",
           backgroundColor: [
@@ -69,8 +67,26 @@ class LineChart extends React.Component {
     this.charTypeChange = this.charTypeChange.bind(this);
   }
 
+  componentWillReceiveProps () {    
+      this.update()
+  }
+
+  update() {
+  
+    let datacopy = Object.assign({}, this.state.data)
+
+    console.log ( this.props.data.chartData )
+
+    for (let i=0; i< this.props.data.chartData.length; i++ ) {
+        datacopy.datasets[0].data[i]= this.props.data.chartData[i].value
+    }
+
+    this.setState({data: datacopy})
+  }
+
   charTypeChange (e) {
     let chart=e.currentTarget.getAttribute('data-chart')
+    if ( chart === this.state.charType ) return;
     this.setState({charType : chart})
   }
 
@@ -90,17 +106,17 @@ class LineChart extends React.Component {
           <div className={ this.state.charType  === 'Line'?  "" : "nodisplay" }>
             <Line data={this.state.data} 
               legend={this.state.legend} 
-              options={this.state.options} />
+              options={this.state.options} redraw/>
           </div>
           <div  className={ this.state.charType   === 'Pie' ?  "" : "nodisplay" }>
             <Pie data={this.state.data}
               legend={this.state.legend} 
-              options={this.state.options} />
+              options={this.state.options} redraw/>
           </div>
           <div  className={ this.state.charType   === 'Bar' ?  "" : "nodisplay" }>
             <Bar data={this.state.data} 
               legend={this.state.legend} 
-              options={this.state.options} />
+              options={this.state.options} redraw/>
           </div>
 
       </div>

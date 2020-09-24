@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import { bindActionCreators } from 'redux';
-import { SET_VALUE, SET_MAP, SET_CHART} from '../actions/actions';
+import { SET_VALUE, SET_MAP, SET_CHART } from '../actions/actions';
 
 
 const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => (
@@ -47,15 +47,14 @@ class TableBasic extends React.Component {
         text: 'value1',
         sort: true,
         headerSortingClasses,
-        footer: columnData => Math.floor ( columnData.reduce((acc, item) => acc + Number(item), 0) / columnData.length ),
+        footer: columnData => Math.floor(columnData.reduce((acc, item) => acc + Number(item), 0) / columnData.length),
         headerEvents: {
           onClick: (e, column, columnIndex) => {
-            this.current = 'value'+(columnIndex-2);
-            this.set_value_parameter(this.current)
-            this.set_map_parameter(
-
-              [{"value":10,"territory":6},{"value":100,"territory":5},{"value":100,"territory":2},{"value": 100,"territory":3},{"value": 100,"territory":4},{"value":100,"territory":1}]
-            )            
+            this.current = 'value' + (columnIndex - 2);
+            if ( this.props.data.value ===  this.current ) return;
+            this.set_value_parameter(this.current);
+            this.set_map_parameter(this.createMapData(this.current));
+            this.set_chart_parameter(this.createChartData(this.current));
           }
         }
 
@@ -64,15 +63,13 @@ class TableBasic extends React.Component {
         text: 'value2',
         sort: true,
         headerSortingClasses,
-        footer: columnData => Math.floor (  columnData.reduce((acc, item) => acc + Number(item), 0) / columnData.length  ),
+        footer: columnData => Math.floor(columnData.reduce((acc, item) => acc + Number(item), 0) / columnData.length),
         headerEvents: {
           onClick: (e, column, columnIndex) => {
-            this.current = 'value'+(columnIndex-2);
-            this.set_value_parameter(this.current)
-            this.set_map_parameter(
-
-              [{"value":10,"territory":6},{"value":100,"territory":5},{"value":20,"territory":2},{"value": 30,"territory":3},{"value": 40,"territory":4},{"value":50,"territory":1}]
-            )  
+            this.current = 'value' + (columnIndex - 2);
+            this.set_value_parameter(this.current);
+            this.set_map_parameter(this.createMapData(this.current));
+            this.set_chart_parameter(this.createChartData(this.current));
           }
         }
       }, {
@@ -80,63 +77,82 @@ class TableBasic extends React.Component {
         text: 'value3',
         sort: true,
         headerSortingClasses,
-        footer: columnData => Math.floor ( columnData.reduce((acc, item) => acc + Number(item), 0) / columnData.length),
+        footer: columnData => Math.floor(columnData.reduce((acc, item) => acc + Number(item), 0) / columnData.length),
         headerEvents: {
           onClick: (e, column, columnIndex) => {
-            this.current = 'value'+(columnIndex-2);
-            this.set_value_parameter(this.current)
-            this.set_map_parameter( this.createMapData()) 
-          } 
+            this.current = 'value' + (columnIndex - 2);
+            this.set_value_parameter(this.current);
+            this.set_map_parameter(this.createMapData(this.current));
+            this.set_chart_parameter(this.createChartData(this.current));
+
+          }
         }
       }];
   }
 
-  createMapData = () => {
-/*    let result = [];
-      let value = this.props.data.value
-      let data  = this.props.data
-      data.forEach((item, index, arr) => {
-        let search = result.find(s => s.territory === item['territory'])   
-        if (!search) {
-          result[result.length] = { 'value': item[`${value}`], territory: item['territory'] }
-        }
-        if (search) {
-          search.value += item[`${value}`];
-        }
-      }) */
-      return [{"value":20,"territory":6},{"value":40,"territory":5},{"value":60,"territory":2},{"value": 80,"territory":3},{"value": 15,"territory":4},{"value":25,"territory":1}]
+  createMapData = (parameter) => {
+    let result = [];
+    let value = parameter;
+    let data = this.props.data.data;
 
+    data.forEach((item) => {
+      let search = result.find(s => s.territory === item['territory'])
+      if (!search) {
+        result[result.length] = { 'value': item[`${value}`], territory: item['territory'] }
+      }
+      if (search) {
+        search.value += item[`${value}`];
+      }
+    })
+    return result
   }
-  
 
- render() {
+
+  createChartData = (parameter) => {
+    let result = [];
+     let value = parameter;
+     let data= this.props.data.data;
+     data.forEach((item ) => {
+   
+       let search = result.find(s => s.operator === item['operator'])
+   
+       if (!search) {
+         result[result.length] = { 'value': item[`${value}`], operator: item['operator'] }
+       }
+   
+       if (search) {
+         search.value += item[`${value}`];
+       }
+     })
+    return result;
+  }
+
+
+  render() {
     return (
-          <div className='container'>
-            <div className='h3'>Диаграмма показателя {this.props.data['value']}</div>
-            <BootstrapTable
-            keyField="id"
-            data={this.products}
-            columns={this.columns}
-            bootstrap4
-            pagination={paginationFactory()}
-            striped
-            hover  />
-          </div>
-          
+      <div className='container'>
+        <div className='h3'>Диаграмма показателя {this.props.data['value']}</div>
+        <BootstrapTable
+          keyField="id"
+          data={this.products}
+          columns={this.columns}
+          bootstrap4
+          pagination={paginationFactory()}
+          striped
+          hover />
+      </div>
+
     );
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    SET_VALUE: bindActionCreators(SET_VALUE, dispatch ),
-    SET_MAP: bindActionCreators(SET_MAP, dispatch ) 
-
+    SET_VALUE: bindActionCreators(SET_VALUE, dispatch),
+    SET_MAP: bindActionCreators(SET_MAP, dispatch),
+    SET_CHART: bindActionCreators(SET_CHART, dispatch),
   }
 }
 
-export default connect( state => ({ data: state  }), mapDispatchToProps )(TableBasic);
-
-
-
+export default connect(state => ({ data: state }), mapDispatchToProps)(TableBasic);
 
