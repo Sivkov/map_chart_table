@@ -14,10 +14,11 @@ let initilaState = {
   chartData: [] ,  
   regionTable: [] ,  
   operatorTable: [],
+  maxData: 100,
 }
 
-let rows = 110;
-let operators = 13;
+let rows = 20;
+let operators = 10;
 const TERRITORY = 6;
 for (let i = 0; i < rows; i++) {
   initilaState['data'].push({})
@@ -73,7 +74,6 @@ function createChartData(data, value = 'value1') {
     }
   })
 
-  console.log ( result)
   return result
 
 }
@@ -87,6 +87,8 @@ function getData(state = initilaState, action) {
       return { ...state, mapData: action.payload }
     case 'SET_CHART':
       return { ...state, chartData: action.payload }
+    case 'SET_MAX':
+      return { ...state, mapData: action.payload }
 
     default:
       return state;
