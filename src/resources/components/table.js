@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import { bindActionCreators } from 'redux';
-import { SET_VALUE, SET_MAP, SET_CHART , SET_MAX} from '../actions/actions';
+import { SET_VALUE, SET_MAP, SET_CHART } from '../actions/actions';
 
 
 const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => (
@@ -18,7 +18,6 @@ class TableBasic extends React.Component {
     this.set_value_parameter = this.props.SET_VALUE
     this.set_chart_parameter = this.props.SET_CHART
     this.set_map_parameter = this.props.SET_MAP
-    this.set_max_parameter = this.props.SET_MAX
 
 
     this.columns = [
@@ -56,8 +55,6 @@ class TableBasic extends React.Component {
             this.set_value_parameter(this.current);
             this.set_map_parameter(this.createMapData(this.current));
             this.set_chart_parameter(this.createChartData(this.current));
-            this.set_max_parameter( 100 );
-
           }
         }
 
@@ -73,9 +70,6 @@ class TableBasic extends React.Component {
             this.set_value_parameter(this.current);
             this.set_map_parameter(this.createMapData(this.current));
             this.set_chart_parameter(this.createChartData(this.current));
-            this.set_max_parameter( 150 );
-
-
           }
         }
       }, {
@@ -90,8 +84,6 @@ class TableBasic extends React.Component {
             this.set_value_parameter(this.current);
             this.set_map_parameter(this.createMapData(this.current));
             this.set_chart_parameter(this.createChartData(this.current));
-
-
           }
         }
       }];
@@ -136,13 +128,6 @@ class TableBasic extends React.Component {
     return result;
   }
 
-  maxdata = () => {
-    let max = this.props.data.maxData;
-    max = 200
-    return max//Math.max ( ...this.props.data.mapData.map( a => a.value) )
-  }
-
-
   render() {
     return (
       <div className='container'>
@@ -166,8 +151,6 @@ const mapDispatchToProps = (dispatch) => {
     SET_VALUE: bindActionCreators(SET_VALUE, dispatch),
     SET_MAP: bindActionCreators(SET_MAP, dispatch),
     SET_CHART: bindActionCreators(SET_CHART, dispatch),
-    SET_MAX: bindActionCreators(SET_MAX, dispatch),
-
   }
 }
 

@@ -12,9 +12,3 @@ export const SET_MAP = (value) => ({
   type: 'SET_MAP',
   payload: value,
 });
-
-export const SET_MAX = (value) => ({
-  type: 'SET_MAX',
-  payload: value,
-});
-
