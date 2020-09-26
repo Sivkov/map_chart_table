@@ -42,19 +42,13 @@ operatorsData.map((item, index) => initilaState['chartData'].push(item['value'])
 function createMapData(data, value = 'value1') {
 
   let result = [];
-  data.forEach((item, index, arr) => {
 
-    let search = result.find(s => s.territory === item['territory'])
-
-    if (!search) {
-      result[result.length] = { 'value': item[`${value}`], territory: item['territory'] }
-    }
-
-    if (search) {
-      search.value += item[`${value}`];
-    }
-  })
+  for ( let i = 0; i < TERRITORY; i++) {
+    result.push({ 'value':1, 'territory': i+1})
+  }
+  
   return result;
+
 }
 
 
@@ -72,7 +66,8 @@ function createChartData(data, value = 'value1') {
       search.value += item[`${value}`];
     }
   })
-  return result
+  
+  return result 
 }
 
 function getData(state = initilaState, action) {

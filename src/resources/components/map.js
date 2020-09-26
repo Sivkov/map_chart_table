@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Overlay, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
-
 const COLORS = ['#1abb9c', '#48c9b0', '#76d6c4', '#a3e4d7', '#d1f1eb']
 const REGIONS = 6;
 const REGIONSMAP =
@@ -21,7 +20,6 @@ export class Map extends Component {
     super(props);
     this.colorUpdater = this.colorUpdater.bind(this);
     this.dataUpdater = this.dataUpdater.bind(this);
-
   }
 
   colorUpdater (ind) {
@@ -37,11 +35,6 @@ export class Map extends Component {
   dataUpdater (ind) {
     let cData =  this.props.data.mapData[ind] ? this.props.data.mapData[ind].value : 0 ;
     return (cData)
-  }
-
-
-  landHover (e) {
-    
   }
 
   render() {

@@ -19,7 +19,6 @@ class TableBasic extends React.Component {
     this.set_chart_parameter = this.props.SET_CHART
     this.set_map_parameter = this.props.SET_MAP
 
-
     this.columns = [
       {
         dataField: 'id',
@@ -141,7 +140,6 @@ class TableBasic extends React.Component {
           striped
           hover />
       </div>
-
     );
   }
 }

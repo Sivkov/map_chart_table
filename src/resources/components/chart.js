@@ -69,17 +69,15 @@ class LineChart extends React.Component {
   }
 
 
-  componentDidUpdate(prevProps) {
+ componentDidUpdate(prevProps) {
     if (this.props.data.mapData !== prevProps.data.mapData) {
       this.update()
     }
-  }
+  } 
 
   update() {
   
     let datacopy = Object.assign({}, this.state.data)
-
-
     for (let i=0; i< this.props.data.chartData.length; i++ ) {
         datacopy.datasets[0].data[i]= this.props.data.chartData[i].value
     }
