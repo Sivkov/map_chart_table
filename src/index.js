@@ -17,8 +17,8 @@ let initilaState = {
   maxData: 100,
 }
 
-let rows = 20;
-let operators = 10;
+let rows = 6;
+let operators = 2;
 const TERRITORY = 6;
 for (let i = 0; i < rows; i++) {
   initilaState['data'].push({})
@@ -30,7 +30,7 @@ initilaState['data'].forEach((id, index) => {
   id['value1'] = Math.floor(Math.random() * 101);
   id['value2'] = Math.floor(Math.random() * 201);
   id['value3'] = Math.floor(Math.random() * 90);
-  id['territory'] = Math.floor(Math.random() * TERRITORY) + 1;
+  id['territory'] = index+1//Math.floor(Math.random() * TERRITORY) + 1;
 })
 
 initilaState['mapData'] = createMapData(initilaState['data'], initilaState['value'])
@@ -53,9 +53,7 @@ function createMapData(data, value = 'value1') {
       search.value += item[`${value}`];
     }
   })
-
   return result;
-
 }
 
 
@@ -73,11 +71,8 @@ function createChartData(data, value = 'value1') {
       search.value += item[`${value}`];
     }
   })
-
   return result
-
 }
-
 
 function getData(state = initilaState, action) {
   switch (action.type) {
@@ -88,7 +83,7 @@ function getData(state = initilaState, action) {
     case 'SET_CHART':
       return { ...state, chartData: action.payload }
     case 'SET_MAX':
-      return { ...state, mapData: action.payload }
+      return { ...state, maxData: action.payload }
 
     default:
       return state;

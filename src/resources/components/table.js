@@ -57,7 +57,8 @@ class TableBasic extends React.Component {
             this.set_value_parameter(this.current);
             this.set_map_parameter(this.createMapData(this.current));
             this.set_chart_parameter(this.createChartData(this.current));
-          //  this.set_max_parameter( this.maxData());
+            this.set_max_parameter( 100 );
+
           }
         }
 
@@ -73,7 +74,8 @@ class TableBasic extends React.Component {
             this.set_value_parameter(this.current);
             this.set_map_parameter(this.createMapData(this.current));
             this.set_chart_parameter(this.createChartData(this.current));
-          //  this.set_max_parameter( this.maxData());
+            this.set_max_parameter( 150 );
+
 
           }
         }
@@ -89,7 +91,7 @@ class TableBasic extends React.Component {
             this.set_value_parameter(this.current);
             this.set_map_parameter(this.createMapData(this.current));
             this.set_chart_parameter(this.createChartData(this.current));
-         //   this.set_max_parameter( this.maxData() );
+            this.set_max_parameter( 200 );
 
 
           }
@@ -136,7 +138,7 @@ class TableBasic extends React.Component {
 
   maxdata = () => {
     let max = this.props.data.maxData;
-    max= 200
+    max = 200
     return max//Math.max ( ...this.props.data.mapData.map( a => a.value) )
   }
 

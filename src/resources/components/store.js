@@ -1,8 +1,6 @@
 import React from "react";
 import { Line, Pie, Bar } from "react-chartjs-2";
 import Alert from 'react-bootstrap/Alert';
-
-
 import '../style.css'
 
 class LineChart extends React.Component {

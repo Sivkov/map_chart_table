@@ -2,30 +2,36 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import jQuery from "jquery";
 
-const COLORS = ['rgba(26, 187, 156, 1)', 'rgba(26, 187, 156, 0.8)','rgba(26, 187, 156, 0.6)', 'rgba(26, 187, 156, 0.4)', 'rgba(26, 187, 156, 0.2)'];
+const COLORS = ['rgba(26, 187, 156, 1)', 'rgba(26, 187, 156, 0.8)', 'rgba(26, 187, 156, 0.6)', 'rgba(26, 187, 156, 0.4)', 'rgba(26, 187, 156, 0.2)'];
 const REGIONS = 6;
 
 export class Map extends Component {
   constructor(props) {
     super(props);
-    this.reDrawMap = this.reDrawMap.bind(this);
     this.state = {
-      maxData: 1500 /* Math.max(...this.dataMap.map( a => a.value)) */,
-      dataMap: this.props.data.mapData,
+      maxData: null /* Math.max(...this.dataMap.map( a => a.value)) */,
     };
+    this.reDrawMap = this.reDrawMap.bind(this);
+
   }
 
   reDrawMap() {
+
+    if (!this.props.data) return;
+
     for (let i = 0; i < REGIONS; i++) {
-      // sort value
+      let max = Math.max(...this.props.data.mapData.map(a => a.value));
+      this.setState({ maxData: max })
       let cData = this.props.data.mapData[i].value;
-      let currentColor = Math.ceil( cData  /  (this.state.maxData / (COLORS.length - 1)));
+      let currentColor = Math.ceil(cData / (this.state.maxData / (COLORS.length - 1)));
       jQuery(`#CY-0${i}`).attr("fill", `${COLORS[currentColor]}`);
     }
   }
 
-  componentDidUpdate() {
-    this.reDrawMap();
+  componentDidUpdate(prevProps) {
+    if (this.props.data.mapData !== prevProps.data.mapData) {
+      this.reDrawMap();
+    }
   }
 
   render() {
@@ -41,7 +47,6 @@ export class Map extends Component {
             xlink="http://www.w3.org/1999/xlink"
             version="1.1"
             width="500"
-            height="auto"
           >
             <g>
               <path
@@ -126,21 +131,30 @@ export class Map extends Component {
           </svg>
         </div>
         <div className="map__legend__conrainer">
-                    {
-                      COLORS.map( (color, ind, arr) => {
-                        return (
-                        <div className="map__legend__conrainer__item">
-                          <div className="map__legend__conrainer__item__img" style={{ backgroundColor: color }}></div>
-                        <div className="map__legend__conrainer__item__text">Значения от { (this.state.maxData/arr.length) * ( arr.length - ind)} 
-                        <span>  до </span>{ (this.state.maxData/arr.length) * ( arr.length - ind-1) }</div>
-                        </div>)
-                          })
-                    }
-        
+          {
+            COLORS.map((color, ind, arr) => {
+              return (
+                <div className="map__legend__conrainer__item" key={ind}>
+                  <div className="map__legend__conrainer__item__img" style={{ backgroundColor: color }}></div>
+                  <div className="map__legend__conrainer__item__text">
+                    Значения <span> от </span>
+                    { Math.round(  (this.state.maxData / arr.length) * (arr.length - ind - 1) )}
+                    <span> до </span>
+                    { Math.round( (this.state.maxData / arr.length) * (arr.length - ind) )}</div>
+                </div>)
+            })
+          }
+
         </div>
       </div>
     );
   }
 }
 
-export default connect((state) => ({ data: state }))(Map);
+export default connect(
+  state => ({
+    data: state
+  }),
+  dispatch => ({})
+)(Map);
+

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import TableBasic from "./table";
 import LineChar from './chart';
 import Map from './map';
-import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 

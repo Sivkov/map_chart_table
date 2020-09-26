@@ -77,7 +77,6 @@ class LineChart extends React.Component {
   
     let datacopy = Object.assign({}, this.state.data)
 
-    console.log ( this.props.data.chartData )
 
     for (let i=0; i< this.props.data.chartData.length; i++ ) {
         datacopy.datasets[0].data[i]= this.props.data.chartData[i].value
