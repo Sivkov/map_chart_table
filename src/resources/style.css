@@ -120,6 +120,22 @@ body {
 
 }
 
+.map__tooltip__item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+.map__tooltip__item__img {
+    width: 10px;
+    height: 10px;
+    border: 1px solid #818181;
+
+    margin-right: 10px;
+
+}
+
 
 
 

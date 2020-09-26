@@ -34,8 +34,7 @@ class LineChart extends React.Component {
             '#9B59B6',
             '#9CC2CB',
             '#E74C3C',
-            '#1ABB9C'
-            
+            '#1ABB9C'            
           ]
         },
       ]
@@ -69,8 +68,11 @@ class LineChart extends React.Component {
     this.charTypeChange = this.charTypeChange.bind(this);
   }
 
-  componentWillReceiveProps () {    
+
+  componentDidUpdate(prevProps) {
+    if (this.props.data.mapData !== prevProps.data.mapData) {
       this.update()
+    }
   }
 
   update() {

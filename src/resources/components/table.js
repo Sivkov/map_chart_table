@@ -53,7 +53,6 @@ class TableBasic extends React.Component {
         headerEvents: {
           onClick: (e, column, columnIndex) => {
             this.current = 'value' + (columnIndex - 2);
-            if ( this.props.data.value ===  this.current ) return;
             this.set_value_parameter(this.current);
             this.set_map_parameter(this.createMapData(this.current));
             this.set_chart_parameter(this.createChartData(this.current));
@@ -91,7 +90,6 @@ class TableBasic extends React.Component {
             this.set_value_parameter(this.current);
             this.set_map_parameter(this.createMapData(this.current));
             this.set_chart_parameter(this.createChartData(this.current));
-            this.set_max_parameter( 200 );
 
 
           }
@@ -113,6 +111,8 @@ class TableBasic extends React.Component {
         search.value += item[`${value}`];
       }
     })
+
+    result= result.sort((a,b) => a.territory - b.territory)
     return result
   }
 
