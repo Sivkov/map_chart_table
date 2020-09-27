@@ -25,8 +25,9 @@ export class Map extends Component {
   colorUpdater (ind) {
     let max = Math.max(...this.props.data.mapData.map(a => a.value));
     let cData =  this.props.data.mapData[ind] ? this.props.data.mapData[ind].value : 0 ;
+    if (cData === 0 ) return COLORS[0];
     let currentColor = COLORS.length - Math.ceil(cData / (max / (COLORS.length )));
-    return COLORS[currentColor]
+    return COLORS[currentColor||0]
     
   }
 
@@ -61,7 +62,7 @@ export class Map extends Component {
                           {REGIONSTITLE[ind]}{ind+1}
                           <div className='map__tooltip__item'>
                             <div className="map__tooltip__item__img map__tooltip__item__img" style={{ backgroundColor: this.colorUpdater(ind) }} ></div>
-                      <span>{  this.dataUpdater(ind)}</span>
+                              <span>{  this.dataUpdater(ind)}</span>
                           </div>
                         </Tooltip>
                       }>
@@ -93,9 +94,9 @@ export class Map extends Component {
                   <div className="map__legend__conrainer__item__img" style={{ backgroundColor: color }}></div>
                   <div className="map__legend__conrainer__item__text">
                     Значения <span> от </span>
-                    {Math.round((Math.max(...this.props.data.mapData.map(a => a.value)) / arr.length) * (arr.length - ind - 1))}
+                    {Math.round((Math.max(...this.props.data.mapData.map(a => a.value)) / arr.length) * (arr.length - ind - 1))|| 0}
                     <span> до </span>
-                    {Math.round((Math.max(...this.props.data.mapData.map(a => a.value)) / arr.length) * (arr.length - ind))}</div>
+                    {Math.round((Math.max(...this.props.data.mapData.map(a => a.value)) / arr.length) * (arr.length - ind))|| 0}</div>
                 </div>)
             })
           }
