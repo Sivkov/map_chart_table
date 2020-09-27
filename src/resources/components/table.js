@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import { bindActionCreators } from 'redux';
-import { SET_VALUE, SET_MAP, SET_CHART } from '../actions/actions';
+import { SET_VALUE, SET_MAP, SET_CHART, SET_NEWDATA } from '../actions/actions';
+import { Button, ButtonGroup  } from 'react-bootstrap';
+import {ROWS, TERRITORY, OPERATORS} from './constants'
 
 
 const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => (
@@ -18,6 +20,8 @@ class TableBasic extends React.Component {
     this.set_value_parameter = this.props.SET_VALUE
     this.set_chart_parameter = this.props.SET_CHART
     this.set_map_parameter = this.props.SET_MAP
+    this.set_newdata = this.props.SET_NEWDATA
+
 
     this.columns = [
       {
@@ -26,7 +30,7 @@ class TableBasic extends React.Component {
         sort: true,
         footer: "",
         sort: true,
-        headerSortingClasses
+        headerSortingClasses 
 
       }, {
         dataField: 'operator',
@@ -127,17 +131,50 @@ class TableBasic extends React.Component {
     return result;
   }
 
+  set_data = () => {
+
+    let newState = [] 
+    
+    for (let i = 0; i < ROWS; i++) {
+      newState.push({})
+    }
+    
+    newState.forEach((id, index) => {
+      id['id'] = index + 1;
+      id['operator'] = 'operator' + Math.floor(Math.random() * OPERATORS + 1);
+      id['value1'] = Math.floor(Math.random() * 101);
+      id['value2'] = Math.floor(Math.random() * 201);
+      id['value3'] = Math.floor(Math.random() * 90);
+      id['territory'] = Math.floor(Math.random() * 6) + 1
+    })
+    return newState
+  }
+
+  set = () => {
+    this.set_newdata(this.set_data())
+    this.set_map_parameter(this.createMapData(this.current));
+    this.set_chart_parameter(this.createChartData(this.current));
+  }
+
+
+
   render() {
     return (
-      <div className='container'>
-        <div className='h3'>Диаграмма показателя {this.props.data['value']}</div>
+      <div className='container-fluid'>
+        <div className='table__header__container'>
+          <div className='h3'>Таблица показателей</div> 
+          <Button variant="primary" onClick={  this.set } className="m-10">Get new data</Button>       
+        </div>
         <BootstrapTable
+          container-fluid
           keyField="id"
           data={this.products}
           columns={this.columns}
+          className="table"
           bootstrap4
           pagination={paginationFactory()}
           striped
+          hideSizePerPage = {true}
           hover />
       </div>
     );
@@ -149,6 +186,8 @@ const mapDispatchToProps = (dispatch) => {
     SET_VALUE: bindActionCreators(SET_VALUE, dispatch),
     SET_MAP: bindActionCreators(SET_MAP, dispatch),
     SET_CHART: bindActionCreators(SET_CHART, dispatch),
+    SET_NEWDATA: bindActionCreators(SET_NEWDATA, dispatch),
+
   }
 }
 

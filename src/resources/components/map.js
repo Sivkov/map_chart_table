@@ -23,11 +23,9 @@ export class Map extends Component {
   }
 
   colorUpdater (ind) {
-
     let max = Math.max(...this.props.data.mapData.map(a => a.value));
     let cData =  this.props.data.mapData[ind] ? this.props.data.mapData[ind].value : 0 ;
     let currentColor = COLORS.length - Math.ceil(cData / (max / (COLORS.length )));
-
     return COLORS[currentColor]
     
   }
@@ -39,7 +37,7 @@ export class Map extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container-fluid">
         <div className="h3">Карта регионов {this.props.data["value"]}</div>
         <div className="map__container">
           <svg
@@ -80,7 +78,6 @@ export class Map extends Component {
                         strokeOpacity="0.5"
                         original="#ffffff"
                         d={REGIONSMAP[ind]}    
-
                       />
                     </OverlayTrigger>)
                 })

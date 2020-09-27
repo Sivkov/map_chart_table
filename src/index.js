@@ -4,30 +4,26 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import {ROWS,  OPERATORS, TERRITORY} from './resources/components/constants';
 
 
 let initilaState = { 
-  'value': 'value1' ,  
+  'value': '' ,  
   data: [] ,  
   labelCharts: [] , 
   mapData: [] ,  
   chartData: [] ,  
   regionTable: [] ,  
   operatorTable: [],
-  terrNames: ["Nicosia", "Limassol", "Larnaca", "Famagusta", "Paphos", "Kyrenia"]
 }
 
-let rows = 30;
-let operators = 4;
-const TERRITORY = 6;
-
-for (let i = 0; i < rows; i++) {
+for (let i = 0; i < ROWS; i++) {
   initilaState['data'].push({})
 }
 
 initilaState['data'].forEach((id, index) => {
   id['id'] = index + 1;
-  id['operator'] = 'operator' + Math.floor(Math.random() * operators + 1);
+  id['operator'] = 'operator' + Math.floor(Math.random() * OPERATORS + 1);
   id['value1'] = Math.floor(Math.random() * 101);
   id['value2'] = Math.floor(Math.random() * 201);
   id['value3'] = Math.floor(Math.random() * 90);
@@ -44,7 +40,7 @@ function createMapData(data, value = 'value1') {
   let result = [];
 
   for ( let i = 0; i < TERRITORY; i++) {
-    result.push({ 'value':1, 'territory': i+1})
+    result.push({ 'value':0.1, 'territory': i+1})
   }
   
   return result;
@@ -78,6 +74,8 @@ function getData(state = initilaState, action) {
       return { ...state, mapData: action.payload }
     case 'SET_CHART':
       return { ...state, chartData: action.payload }
+      case 'SET_NEWDATA':
+        return { ...state, data: action.payload }
     default:
       return state;
   }

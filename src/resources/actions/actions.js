@@ -12,3 +12,9 @@ export const SET_MAP = (value) => ({
   type: 'SET_MAP',
   payload: value,
 });
+
+export const SET_NEWDATA = (value) => ({
+  type: 'SET_NEWDATA',
+  payload: value,
+});
+

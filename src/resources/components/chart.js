@@ -1,6 +1,6 @@
 import React from "react";
 import { Line, Pie, Bar } from "react-chartjs-2";
-import { Button, ButtonGroup, Nav  } from 'react-bootstrap';
+import { Button, ButtonGroup  } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 
@@ -94,7 +94,7 @@ class LineChart extends React.Component {
     render() {
 
       return (
-        <div className='container'>
+        <div className='container-fluid'>
           <div className='h3'>Диаграмма показателя {this.props.data['value']}</div>
 
 
