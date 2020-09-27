@@ -12,6 +12,19 @@ const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => (
   sortOrder === 'asc' ? 'demo-sorting-asc' : 'demo-sorting-desc'
 );
 
+const sortCaretType = (order, column) => {
+  if (!order) return (<span><font color="#73879c"></font></span>);
+  else if (order === 'desc') return (
+    <span>
+       <font color="#73879c">▴</font> 
+    </span>);
+  else if (order === 'asc') return (
+    <span>
+       <font color="#73879c">▾</font> 
+    </span>);
+  return null;
+}
+
 class TableBasic extends React.Component {
   constructor(props) {
     super(props);
@@ -23,30 +36,55 @@ class TableBasic extends React.Component {
     this.columns = [
       {
         dataField: 'id',
-        text: '#',
+        text: '',
+        style: {textAlign: 'center'},
+        headerStyle: { textAlign: 'center' },
         sort: true,
+        sortCaret: sortCaretType,        
         footer: "",
-        sort: true,
+        sort: true,        
         headerSortingClasses
 
       }, {
         dataField: 'operator',
         text: 'operator',
+        style: {textAlign: 'center'},
+        headerStyle: { textAlign: 'center' },
         sort: true,
+        sortCaret: sortCaretType,  
         footer: '',
         sort: true,
+        sortCaret: (order, column) => {
+          if (!order) return (<span><font color="#73879c"></font></span>);
+          else if (order === 'desc') return (
+            <span>
+               <font color="#73879c">▴</font> 
+            </span>);
+          else if (order === 'asc') return (
+            <span>
+               <font color="#73879c">▾</font> 
+            </span>);
+          return null;
+        },  
         headerSortingClasses
 
       }, {
         dataField: 'territory',
         text: 'territory',
+        style: {textAlign: 'center'},
+        headerStyle: { textAlign: 'center' },
         sort: true,
+        sortCaret:  sortCaretType,  
         headerSortingClasses,
         footer: ''
       }, {
         dataField: 'value1',
         text: 'value1',
-        sort: true,
+        style: {textAlign: 'center'},
+        headerStyle: { textAlign: 'center' },
+        footerStyle: { textAlign: 'center' },
+                sort: true,
+        sortCaret:  sortCaretType,  
         headerSortingClasses,
         footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0),
         headerEvents: {
@@ -61,7 +99,11 @@ class TableBasic extends React.Component {
       }, {
         dataField: 'value2',
         text: 'value2',
-        sort: true,
+                sort: true,
+        sortCaret:  sortCaretType,  
+        style: {textAlign: 'center'},
+        headerStyle: { textAlign: 'center' },
+        footerStyle: { textAlign: 'center' },
         headerSortingClasses,
         footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0),
         headerEvents: {
@@ -75,7 +117,11 @@ class TableBasic extends React.Component {
       }, {
         dataField: 'value3',
         text: 'value3',
-        sort: true,
+        style: {textAlign: 'center'},
+        headerStyle: { textAlign: 'center' },
+        footerStyle: { textAlign: 'center' },
+                sort: true,
+        sortCaret:  sortCaretType,  
         headerSortingClasses,
         footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0),
         headerEvents: {

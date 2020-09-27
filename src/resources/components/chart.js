@@ -13,7 +13,7 @@ class LineChart extends React.Component {
         labels: this.props.data.labelCharts,
         datasets: [
           {
-            label: 'Показетели операторов',
+            label: '- оператор',
             data: [],
             fill: false,            
             borderColor: "#76d6c4",
