@@ -42,6 +42,11 @@ html {
   font-weight: normal;
 }
 
+.row {
+  justify-content: space-around !important;
+  display: flex;
+}
+
 .container-fluid {
   position: relative;
   min-width: 300px;
@@ -125,6 +130,12 @@ html {
   margin: 0 0 10px 0;
 }
 
+.table th, 
+.table td {
+  max-width: 40px !important;
+  padding: 0.5rem 0.2rem !important;
+}
+
 @media (max-width: 1220px) {
   .h3 {
     font-size: 1rem;
@@ -134,11 +145,7 @@ html {
     margin: 0;
   }
 
-  td,
-  th {
-    padding: 6px !important;
-    width: 40px !important;
-  }
+  
 }
 
 @media (max-width: 1074px) {
