@@ -5,21 +5,16 @@ import Map from './map';
 import { connect } from 'react-redux';
 
 
-
-
-
 export class Main extends Component {
-
   render() {
-
     return (
-      <div className="mainContainer row" >
-           <TableBasic />
-           <LineChar />
-           <Map />
-       </div>
+      <div className="row" >
+        <TableBasic />
+        <LineChar />
+        <Map />
+      </div>
     )
   }
-
 }
+
 export default connect(state => ({ data: state }),)(Main);

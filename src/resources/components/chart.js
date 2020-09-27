@@ -1,45 +1,44 @@
 import React from "react";
 import { Line, Pie, Bar } from "react-chartjs-2";
-import { Button, ButtonGroup  } from 'react-bootstrap';
+import { Button, ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
-
 
 
 class LineChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    charType: 'Line',
-    data :  {
-      labels: this.props.data.labelCharts,
-      datasets: [
-        {
-          label: '',
-          data:  [],
-          fill: true,
-          borderColor: "rgba(108, 117, 125, 0.5);",
-          backgroundColor: [
-            '#3498DB',
-            '#1ABB9C',
-            '#9B59B6',
-            '#9CC2CB',
-            '#E74C3C',
-            '#3498DB',
-            '#1ABB9C',
-            '#9B59B6',
-            '#9CC2CB',
-            '#E74C3C',   
-            '#3498DB',
-            '#1ABB9C',
-            '#9B59B6',
-            '#9CC2CB',
-            '#E74C3C',
-            '#1ABB9C'            
-          ]
-        },
-      ]
-    },
-    options : {
+      charType: 'Line',
+      data: {
+        labels: this.props.data.labelCharts,
+        datasets: [
+          {
+            label: 'Показетели операторов',
+            data: [],
+            fill: false,            
+            borderColor: "#76d6c4",
+            backgroundColor: [
+              '#3498DB',
+              '#1ABB9C',
+              '#9B59B6',
+              '#9CC2CB',
+              '#E74C3C',
+              '#3498DB',
+              '#1ABB9C',
+              '#9B59B6',
+              '#9CC2CB',
+              '#E74C3C',
+              '#3498DB',
+              '#1ABB9C',
+              '#9B59B6',
+              '#9CC2CB',
+              '#E74C3C',
+              '#1ABB9C'
+            ]
+          },
+        ]
+      },
+      options: {
         title: {
           display: true,
           text: this.props.data.value
@@ -56,7 +55,7 @@ class LineChart extends React.Component {
         }
       },
 
-      legend : {
+      legend: {
         display: true,
         position: "bottom",
         labels: {
@@ -69,67 +68,60 @@ class LineChart extends React.Component {
   }
 
 
- componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps) {
     if (this.props.data.mapData !== prevProps.data.mapData) {
       this.update()
     }
-  } 
+  }
 
   update() {
-  
+
     let datacopy = Object.assign({}, this.state.data)
-    for (let i=0; i< this.props.data.chartData.length; i++ ) {
-        datacopy.datasets[0].data[i]= this.props.data.chartData[i].value
+    for (let i = 0; i < this.props.data.chartData.length; i++) {
+      datacopy.datasets[0].data[i] = this.props.data.chartData[i].value
     }
 
-    this.setState({data: datacopy})
+    this.setState({ data: datacopy })
   }
 
-  charTypeChange (e) {
-    let chart=e.currentTarget.getAttribute('data-chart')
-    if ( chart === this.state.charType ) return;
-    this.setState({charType : chart})
+  charTypeChange(e) {
+    let chart = e.currentTarget.getAttribute('data-chart')
+    if (chart === this.state.charType) return;
+    this.setState({ charType: chart })
   }
 
-    render() {
+  render() {
 
-      return (
-        <div className='container-fluid'>
-          <div className='h3'>Диаграмма показателя {this.props.data['value']}</div>
+    return (
+      <div className='container-fluid'>
+        <div className='h3'>Диаграмма показателя {this.props.data['value']}</div>
 
 
         <ButtonGroup >
-          <Button variant="primary" onClick={ this.charTypeChange }  data-chart="Line">Line</Button>
-          <Button variant="primary" onClick={ this.charTypeChange }  data-chart="Pie">Pie</Button>
-          <Button variant="primary" onClick={ this.charTypeChange }  data-chart="Bar">Bar</Button>
+          <Button variant="primary" onClick={this.charTypeChange} data-chart="Line">Line</Button>
+          <Button variant="primary" onClick={this.charTypeChange} data-chart="Pie">Pie</Button>
+          <Button variant="primary" onClick={this.charTypeChange} data-chart="Bar">Bar</Button>
         </ButtonGroup >
-        
-          <div className={ this.state.charType  === 'Line'?  "" : "nodisplay" }>
-            <Line data={this.state.data} 
-              legend={this.state.legend} 
-              options={this.state.options} redraw/>
-          </div>
-          <div  className={ this.state.charType   === 'Pie' ?  "" : "nodisplay" }>
-            <Pie data={this.state.data}
-              legend={this.state.legend} 
-              options={this.state.options} redraw/>
-          </div>
-          <div  className={ this.state.charType   === 'Bar' ?  "" : "nodisplay" }>
-            <Bar data={this.state.data} 
-              legend={this.state.legend} 
-              options={this.state.options} redraw/>
-          </div>
+        <div className={this.state.charType === 'Line' ? "" : "nodisplay"}>
+          <Line data={this.state.data}
+            legend={this.state.legend}
+            options={this.state.options} redraw />
+        </div>
+        <div className={this.state.charType === 'Pie' ? "" : "nodisplay"}>
+          <Pie data={this.state.data}
+            legend={this.state.legend}
+            options={this.state.options} redraw />
+        </div>
+        <div className={this.state.charType === 'Bar' ? "" : "nodisplay"}>
+          <Bar data={this.state.data}
+            legend={this.state.legend}
+            options={this.state.options} redraw />
+        </div>
 
       </div>
-      );
-    }
-    
+    );
   }
 
-  export default connect(
-    state => ({
-      data: state
-    }),
-    dispatch => ({})
-  )(LineChart);
-  
+}
+
+export default connect(state => ({ data: state }), dispatch => ({}))(LineChart);

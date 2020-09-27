@@ -4,16 +4,16 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import {ROWS,  OPERATORS, TERRITORY} from './resources/components/constants';
+import { ROWS, OPERATORS, TERRITORY } from './resources/components/constants';
 
 
-let initilaState = { 
-  'value': '' ,  
-  data: [] ,  
-  labelCharts: [] , 
-  mapData: [] ,  
-  chartData: [] ,  
-  regionTable: [] ,  
+let initilaState = {
+  value: '',
+  data: [],
+  labelCharts: [],
+  mapData: [],
+  chartData: [],
+  regionTable: [],
   operatorTable: [],
 }
 
@@ -32,32 +32,31 @@ initilaState['data'].forEach((id, index) => {
 
 initilaState['mapData'] = createMapData(initilaState['data'], initilaState['value'])
 let operatorsData = createChartData(initilaState['data'], initilaState['value'])
-operatorsData.map((item, index) => initilaState['labelCharts'].push(item['operator']))
-operatorsData.map((item, index) => initilaState['chartData'].push(item['value']))
+operatorsData.map((item) => initilaState['labelCharts'].push(item['operator']))
+operatorsData.map((item) => initilaState['chartData'].push(item['value']))
 
-function createMapData(data, value = 'value1') {
+function createMapData() {
   let result = [];
-  for ( let i = 0; i < TERRITORY; i++) {
-    result.push({ 'value':'', 'territory': i+1})
+  for (let i = 0; i < TERRITORY; i++) {
+    result.push({ value: '', 'territory': i + 1 })
   }
   return result;
-
 }
-
 
 function createChartData(data, value = 'value1') {
   let result = [];
+
   data.forEach((item) => {
     let search = result.find(s => s.operator === item['operator'])
     if (!search) {
-      result[result.length] = { 'value': item[`${value}`], operator: item['operator'] }
+      result[result.length] = { value: item[`${value}`], operator: item['operator'] }
     }
     if (search) {
       search.value += item[`${value}`];
     }
   })
-  
-  return result 
+
+  return result
 }
 
 function getData(state = initilaState, action) {
@@ -68,8 +67,8 @@ function getData(state = initilaState, action) {
       return { ...state, mapData: action.payload }
     case 'SET_CHART':
       return { ...state, chartData: action.payload }
-      case 'SET_NEWDATA':
-        return { ...state, data: action.payload }
+    case 'SET_NEWDATA':
+      return { ...state, data: action.payload }
     default:
       return state;
   }

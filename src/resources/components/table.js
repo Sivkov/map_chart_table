@@ -5,7 +5,7 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import { bindActionCreators } from 'redux';
 import { SET_VALUE, SET_MAP, SET_CHART, SET_NEWDATA } from '../actions/actions';
 import { Button } from 'react-bootstrap';
-import {ROWS, OPERATORS, TERRITORY} from './constants'
+import { ROWS, OPERATORS, TERRITORY } from './constants'
 
 
 const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => (
@@ -20,8 +20,6 @@ class TableBasic extends React.Component {
     this.set_chart_parameter = this.props.SET_CHART
     this.set_map_parameter = this.props.SET_MAP
     this.set_newdata = this.props.SET_NEWDATA
-
-
     this.columns = [
       {
         dataField: 'id',
@@ -29,7 +27,7 @@ class TableBasic extends React.Component {
         sort: true,
         footer: "",
         sort: true,
-        headerSortingClasses 
+        headerSortingClasses
 
       }, {
         dataField: 'operator',
@@ -50,7 +48,7 @@ class TableBasic extends React.Component {
         text: 'value1',
         sort: true,
         headerSortingClasses,
-        footer: columnData => Math.floor(columnData.reduce((acc, item) => acc + Number(item), 0) / columnData.length),
+        footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0),
         headerEvents: {
           onClick: (e, column, columnIndex) => {
             this.current = 'value' + (columnIndex - 2);
@@ -65,7 +63,7 @@ class TableBasic extends React.Component {
         text: 'value2',
         sort: true,
         headerSortingClasses,
-        footer: columnData => Math.floor(columnData.reduce((acc, item) => acc + Number(item), 0) / columnData.length),
+        footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0),
         headerEvents: {
           onClick: (e, column, columnIndex) => {
             this.current = 'value' + (columnIndex - 2);
@@ -79,7 +77,7 @@ class TableBasic extends React.Component {
         text: 'value3',
         sort: true,
         headerSortingClasses,
-        footer: columnData => Math.floor(columnData.reduce((acc, item) => acc + Number(item), 0) / columnData.length),
+        footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0),
         headerEvents: {
           onClick: (e, column, columnIndex) => {
             this.current = 'value' + (columnIndex - 2);
@@ -97,7 +95,7 @@ class TableBasic extends React.Component {
     let data = this.props.data.data;
 
     for (let i = 0; i < TERRITORY; i++) {
-      result.push({'value': 0, territory: i+1})
+      result.push({ 'value': 0, territory: i + 1 })
     }
 
     data.forEach((item) => {
@@ -109,37 +107,36 @@ class TableBasic extends React.Component {
         search.value += item[`${value}`];
       }
     })
-
-    result= result.sort((a,b) => a.territory - b.territory)
+    result = result.sort((a, b) => a.territory - b.territory)
     return result
   }
 
 
   createChartData = (parameter) => {
     let result = [];
-     let value = parameter;
-     let data= this.props.data.data;
-     data.forEach((item ) => {
-   
-       let search = result.find(s => s.operator === item['operator'])
-   
-       if (!search) {
-         result[result.length] = { 'value': item[`${value}`], operator: item['operator'] }
-       }
-   
-       if (search) {
-         search.value += item[`${value}`];
-       }
-     })
+    let value = parameter;
+    let data = this.props.data.data;
+    data.forEach((item) => {
+
+      let search = result.find(s => s.operator === item['operator'])
+
+      if (!search) {
+        result[result.length] = { 'value': item[`${value}`], operator: item['operator'] }
+      }
+
+      if (search) {
+        search.value += item[`${value}`];
+      }
+    })
     return result;
   }
 
   set_data = () => {
-    let newState = [] 
+    let newState = []
     for (let i = 0; i < ROWS; i++) {
       newState.push({})
     }
-    
+
     newState.forEach((id, index) => {
       id['id'] = index + 1;
       id['operator'] = 'operator' + Math.floor(Math.random() * OPERATORS + 1);
@@ -158,11 +155,15 @@ class TableBasic extends React.Component {
   }
 
   render() {
+    const options = {
+      sizePerPage: 10,
+      hideSizePerPage: true,
+    };
     return (
       <div className='container-fluid'>
         <div className='table__header__container'>
-          <div className='h3'>Таблица показателей</div> 
-          <Button variant="primary" onClick={  this.set } className="m-10">Get new data</Button>
+          <div className='h3'>Таблица показателей</div>
+          <Button variant="primary" onClick={this.set} className="m-10">Get new data</Button>
         </div>
         <BootstrapTable
           container-fluid
@@ -171,9 +172,9 @@ class TableBasic extends React.Component {
           columns={this.columns}
           className="table"
           bootstrap4
-          pagination={paginationFactory()}
+          pagination={paginationFactory(options)}
           striped
-          hideSizePerPage = {true}
+          hideSizePerPage={true}
           hover />
       </div>
     );
