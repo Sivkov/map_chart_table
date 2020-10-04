@@ -32,7 +32,7 @@ export class Map extends Component {
         <div className="map__container">
           <svg
             className="svg"
-            viewBox="0 0 600 400"
+            viewBox="0 0 610 400"
             xmlns="http://www.w3.org/2000/svg"
             amcharts="http://amcharts.com/ammap"
             xlink="http://www.w3.org/1999/xlink"
