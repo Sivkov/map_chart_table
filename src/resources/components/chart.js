@@ -4,7 +4,7 @@ import { Button, ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 
-class LineChart extends React.Component {
+class Chart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -124,4 +124,4 @@ class LineChart extends React.Component {
 
 }
 
-export default connect(state => ({ data: state }), dispatch => ({}))(LineChart);
+export default connect(state => ({ data: state }), dispatch => ({}))(Chart);
