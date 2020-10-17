@@ -18,3 +18,9 @@ export const SET_NEWDATA = (value) => ({
   payload: value,
 });
 
+export const SET_LEGEND = (value) => ({
+  type: 'SET_LEGEND',
+  payload: value,
+});
+
+

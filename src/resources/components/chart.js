@@ -82,8 +82,14 @@ class Chart extends React.Component {
     }
 
     this.setState({ data: datacopy })
-  }
 
+    this.setState(prevState => {
+      let data = Object.assign({}, prevState.data); 
+      data.labels = this.props.data.labelCharts;       
+      return { data };                                 
+    })
+   
+  }
   charTypeChange(e) {
     let chart = e.currentTarget.getAttribute('data-chart')
     if (chart === this.state.charType) return;

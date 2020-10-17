@@ -1,6 +1,6 @@
-export const ROWS = 20;
-export const OPERATORS = 6;
-export const TERRITORY = 6;
+export const ROWS = 3;
+export const OPERATORS = 3;
+export const TERRITORY = 3;
 export const COLORS = ['#1abb9c', '#48c9b0', '#76d6c4', '#a3e4d7', '#d1f1eb']
 export const REGIONSMAP =
   [

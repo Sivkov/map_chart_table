@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import TableBasic from "./table";
 import Chart from './chart';
 import Map from './map';
-import LaunchScreen from './launchScreen';
-import { connect } from 'react-redux';
+/* import LaunchScreen from './launchScreen';
+ */import { connect } from 'react-redux';
 
 
 export class Main extends Component {
@@ -13,7 +13,6 @@ export class Main extends Component {
         <TableBasic />
         <Chart />
         <Map />
-        <LaunchScreen />
       </div>
     )
   }

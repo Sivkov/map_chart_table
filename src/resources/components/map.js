@@ -12,7 +12,7 @@ export class Map extends Component {
 
   colorUpdater(ind) {
     let max = Math.max(...this.props.data.mapData.map(a => a.value));
-    let cData = this.props.data.mapData[ind].value;
+    let cData = this.props.data.mapData &&  this.props.data.mapData[ind] ? this.props.data.mapData[ind].value :0
     if (cData === 0) return COLORS[4];
     if (cData === max) return COLORS[0]
     let currentColor = COLORS.length - Math.ceil(cData / (max / (COLORS.length)));

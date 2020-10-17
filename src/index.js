@@ -27,7 +27,7 @@ initilaState['data'].forEach((id, index) => {
   id['value1'] = Math.floor(Math.random() * 101);
   id['value2'] = Math.floor(Math.random() * 201);
   id['value3'] = Math.floor(Math.random() * 90);
-  id['territory'] = Math.floor(Math.random() * 6) + 1
+  id['territory'] = Math.floor(Math.random() * OPERATORS) + 1
 })
 
 initilaState['mapData'] = createMapData(initilaState['data'], initilaState['value'])
@@ -69,12 +69,18 @@ function getData(state = initilaState, action) {
       return { ...state, chartData: action.payload }
     case 'SET_NEWDATA':
       return { ...state, data: action.payload }
+    case 'SET_LEGEND':
+      return { ...state, labelCharts: action.payload }
     default:
       return state;
   }
 }
 
-const store = createStore(getData);
+const store = createStore(getData, 
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(
+    {trace: true, 
+    traceLimit: 25}
+  ));
 
 ReactDOM.render(
   <Provider store={store}>

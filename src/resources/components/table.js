@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import { bindActionCreators } from 'redux';
-import { SET_VALUE, SET_MAP, SET_CHART, SET_NEWDATA } from '../actions/actions';
+import { SET_VALUE, SET_MAP, SET_CHART, SET_NEWDATA, SET_LEGEND} from '../actions/actions';
 import { Button } from 'react-bootstrap';
 import { ROWS, OPERATORS, TERRITORY } from './constants'
 
@@ -31,6 +31,7 @@ class TableBasic extends React.Component {
     this.current = false
     this.set_value_parameter = this.props.SET_VALUE
     this.set_chart_parameter = this.props.SET_CHART
+    this.set_legend_parameter = this.props.SET_LEGEND
     this.set_map_parameter = this.props.SET_MAP
     this.set_newdata = this.props.SET_NEWDATA
     this.columns = [
@@ -86,13 +87,11 @@ class TableBasic extends React.Component {
                 sort: true,
         sortCaret:  sortCaretType,  
         headerSortingClasses,
-        footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0),
+        footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0)||"",
         headerEvents: {
           onClick: (e, column, columnIndex) => {
             this.current = 'value' + (columnIndex - 2);
-            this.set_value_parameter(this.current);
-            this.set_map_parameter(this.createMapData(this.current));
-            this.set_chart_parameter(this.createChartData(this.current));
+            this.set();
           }
         }
 
@@ -105,13 +104,12 @@ class TableBasic extends React.Component {
         headerStyle: { textAlign: 'center' },
         footerStyle: { textAlign: 'center' },
         headerSortingClasses,
-        footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0),
+        footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0)||"",
         headerEvents: {
           onClick: (e, column, columnIndex) => {
             this.current = 'value' + (columnIndex - 2);
-            this.set_value_parameter(this.current);
-            this.set_map_parameter(this.createMapData(this.current));
-            this.set_chart_parameter(this.createChartData(this.current));
+            this.set();
+
           }
         }
       }, {
@@ -123,13 +121,11 @@ class TableBasic extends React.Component {
                 sort: true,
         sortCaret:  sortCaretType,  
         headerSortingClasses,
-        footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0),
+        footer: columnData => columnData.reduce((acc, item) => acc + Number(item), 0)||"",
         headerEvents: {
           onClick: (e, column, columnIndex) => {
             this.current = 'value' + (columnIndex - 2);
-            this.set_value_parameter(this.current);
-            this.set_map_parameter(this.createMapData(this.current));
-            this.set_chart_parameter(this.createChartData(this.current));
+            this.set();
           }
         }
       }];
@@ -154,6 +150,7 @@ class TableBasic extends React.Component {
       }
     })
     result = result.sort((a, b) => a.territory - b.territory)
+    
     return result
   }
 
@@ -177,6 +174,30 @@ class TableBasic extends React.Component {
     return result;
   }
 
+
+  createLegendData = (parameter) => {
+    let result = [];
+    let legend = [];
+    let value = parameter;
+    let data = this.props.data.data;
+    data.forEach((item) => {
+
+      let search = result.find(s => s.operator === item['operator'])
+
+      if (!search) {
+        result[result.length] = { 'value': item[`${value}`], operator: item['operator'] }
+      }
+
+      if (search) {
+        search.value += item[`${value}`];
+      }
+    })
+
+    result.map((item) => legend.push(item['operator']))
+
+    return legend;
+  }
+
   set_data = () => {
     let newState = []
     for (let i = 0; i < ROWS; i++) {
@@ -189,15 +210,18 @@ class TableBasic extends React.Component {
       id['value1'] = Math.floor(Math.random() * 101);
       id['value2'] = Math.floor(Math.random() * 201);
       id['value3'] = Math.floor(Math.random() * 90);
-      id['territory'] = Math.floor(Math.random() * 6) + 1
+      id['territory'] = Math.floor(Math.random() * TERRITORY) + 1
     })
     return newState
   }
 
-  set = () => {
-    this.set_newdata(this.set_data())
+  set = (needNewData = false) => {
+    console.log("needNewData")
+    if(needNewData) {this.set_newdata(this.set_data())} else {
     this.set_map_parameter(this.createMapData(this.current));
     this.set_chart_parameter(this.createChartData(this.current));
+    this.set_legend_parameter(this.createLegendData(this.current));
+    }
   }
 
   render() {
@@ -209,7 +233,7 @@ class TableBasic extends React.Component {
       <div className='container-fluid'>
         <div className='table__header__container'>
           <div className='h3'>Таблица показателей</div>
-          <Button variant="primary" onClick={this.set} className="m-10">Get new data</Button>
+          <Button variant="primary" onClick={() => {this.set(true)}} className="m-10">Get new data</Button>
         </div>
         <BootstrapTable
           container-fluid
@@ -233,6 +257,8 @@ const mapDispatchToProps = (dispatch) => {
     SET_MAP: bindActionCreators(SET_MAP, dispatch),
     SET_CHART: bindActionCreators(SET_CHART, dispatch),
     SET_NEWDATA: bindActionCreators(SET_NEWDATA, dispatch),
+    SET_LEGEND: bindActionCreators(SET_LEGEND, dispatch),
+
 
   }
 }
